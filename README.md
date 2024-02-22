@@ -1,27 +1,15 @@
-# [Example WASI proposal]
-
-This template can be used to start a new proposal, which can then be proposed in the WASI Subgroup meetings.
-
-The sections below are recommended. However, every proposal is different, and the community can help you flesh out the proposal, so don't block on having something filled in for each one of them.
-
-Thank you to the W3C Privacy CG for the [inspiration](https://github.com/privacycg/template)!
-
-# [Title]
+# WASI WebGPU+
 
 A proposed [WebAssembly System Interface](https://github.com/WebAssembly/WASI) API.
 
 ### Current Phase
 
-[Fill in the current phase, e.g. Phase 1]
+Phase 1
 
 ### Champions
 
-<!---
-Please limit to one champion per company or organization
--->
-- [Champion 1]
-- [Champion 2]
-- [etc.]
+- Mendy Berger
+- Sean Isom 
 
 ### Portability Criteria
 
@@ -46,7 +34,15 @@ TODO before entering Phase 2.
 
 ### Introduction
 
-[The "executive summary" or "abstract". Explain in a few sentences what the goals of the project are, and a brief overview of how the solution works. This should be no more than 1-2 paragraphs.]
+This proposal is a collection of multiple interfaces.
+
+| Interface             | Description                                                                       |
+| ----------------------| --------------------------------------------------------------------------------- |
+| wasi-webgpu           | WebGPU interface for interacting with GPUs                                        |
+| wasi-frame-buffer     | A CPU based graphics API                                                          |
+| wasi-canvas           | A canvas/surface interface                                                        |
+| wasi-graphics-context | A small interface connecting the graphics APIs (webgpu or frame-buffer) to canvas |
+
 
 ### Goals [or Motivating Use Cases, or Scenarios]
 
