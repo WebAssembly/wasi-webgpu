@@ -1,0 +1,17 @@
+package wasi:webgpu;
+
+interface frame-buffer {
+    use graphics-context.{graphics-context, graphics-context-buffer};
+
+    connect-graphics-context: func(context: borrow<graphics-context>);
+
+    resource frame-buffer {
+        from-graphics-buffer: static func(buffer: graphics-context-buffer) -> frame-buffer;
+
+        length: func() -> u32;
+
+        get: func(i: u32) -> u32;
+
+        set: func(i: u32, val: u32);
+    }
+}

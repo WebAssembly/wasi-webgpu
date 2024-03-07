@@ -1,0 +1,36 @@
+package wasi:webgpu;
+
+// TODO: Move this into mini-canvas.
+
+interface pointer-events {
+    use wasi:io/poll@0.2.0.{pollable};
+
+    up-listener: func() -> pointer-up-listener;
+
+    resource pointer-up-listener {
+        subscribe: func() -> pollable;
+
+        get: func() -> option<pointer-event>;
+    }
+
+    down-listener: func() -> pointer-down-listener;
+
+    resource pointer-down-listener {
+        subscribe: func() -> pollable;
+
+        get: func() -> option<pointer-event>;
+    }
+
+    move-listener: func() -> pointer-move-listener;
+
+    resource pointer-move-listener {
+        subscribe: func() -> pollable;
+
+        get: func() -> option<pointer-event>;
+    }
+
+    record pointer-event {
+        x: float64,
+        y: float64,
+    }
+}
