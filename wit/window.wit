@@ -134,7 +134,7 @@ interface window {
         buttons: mouse-buttons,
     }
     
-    record scroll {
+    record wheel {
         mouse: mouse,
         x: f32,
         y: f32,
@@ -153,6 +153,8 @@ interface window {
         /// Windows can request to go into fullscreen mode. This capability not being present can mean fullscreen windows
         /// are not supported, or the window is forced fullscreen.
         fullscreen,
+        /// Whether windows are resizable, be it by the user or the program itself.
+        size,
     }
     
     
@@ -217,8 +219,8 @@ interface window {
         subscribe-mouse-move: func() -> pollable;
         get-mouse-move: func() -> option<mouse>;
         
-        subscribe-scroll: func() -> pollable;
-        get-scroll: func() -> option<scroll>;
+        subscribe-wheel: func() -> pollable;
+        get-wheel: func() -> option<wheel>;
         
         
         // If the pollable is ready, that means a close event has occurred. Since there is no data, ther e is no need
