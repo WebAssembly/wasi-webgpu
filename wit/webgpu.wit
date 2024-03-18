@@ -336,8 +336,8 @@ interface webgpu {
         mag-filter: option<gpu-filter-mode>,
         min-filter: option<gpu-filter-mode>,
         mipmap-filter: option<gpu-mipmap-filter-mode>,
-        lod-min-clamp: option<float32>,
-        lod-max-clamp: option<float32>,
+        lod-min-clamp: option<f32>,
+        lod-max-clamp: option<f32>,
         compare: option<gpu-compare-function>,
         max-anisotropy: option<u16>,
         label: option<string>,
@@ -654,7 +654,7 @@ interface webgpu {
         entry-point: option<string>,
         // record<USVString, GPUPipelineConstantValue> constants;
     }
-    type gpu-pipeline-constant-value = float64;
+    type gpu-pipeline-constant-value = f64;
     record gpu-vertex-state {
         buffers: option<list<gpu-vertex-buffer-layout>>,
         module: borrow<gpu-shader-module>,
@@ -677,8 +677,8 @@ interface webgpu {
         stencil-read-mask: option<gpu-stencil-value>,
         stencil-write-mask: option<gpu-stencil-value>,
         depth-bias: option<gpu-depth-bias>,
-        depth-bias-slope-scale: option<float32>,
-        depth-bias-clamp: option<float32>,
+        depth-bias-slope-scale: option<f32>,
+        depth-bias-clamp: option<f32>,
     }
     record gpu-multisample-state {
         count: option<gpu-size32>,
@@ -865,7 +865,7 @@ interface webgpu {
         label: option<string>,
     }
     resource gpu-render-pass-encoder {
-        set-viewport: func(x: float32, y: float32, width: float32, height: float32, min-depth: float32, max-depth: float32);
+        set-viewport: func(x: f32, y: f32, width: f32, height: f32, min-depth: f32, max-depth: f32);
         set-scissor-rect: func(x: gpu-integer-coordinate, y: gpu-integer-coordinate, width: gpu-integer-coordinate, height: gpu-integer-coordinate);
         set-blend-constant: func(color: gpu-color);
         set-stencil-reference: func(reference: gpu-stencil-value);
@@ -919,7 +919,7 @@ interface webgpu {
         beginning-of-pass-write-index: option<gpu-size32>,
         end-of-pass-write-index: option<gpu-size32>,
     }
-    type gpu-color = gpu-color-dict-or-list-float64;
+    type gpu-color = gpu-color-dict-or-list-f64;
     resource gpu-render-bundle {
         label: func() -> string;
         set-label: func(label: string);
@@ -939,7 +939,7 @@ interface webgpu {
     }
     record gpu-render-pass-depth-stencil-attachment {
         view: borrow<gpu-texture-view>,
-        depth-clear-value: option<float32>,
+        depth-clear-value: option<f32>,
         depth-load-op: option<gpu-load-op>,
         depth-store-op: option<gpu-store-op>,
         depth-read-only: option<bool>,
@@ -1028,14 +1028,14 @@ interface webgpu {
         error: gpu-error,
     }
     record gpu-color-dict {
-        r: float64,
-        g: float64,
-        b: float64,
-        a: float64,
+        r: f64,
+        g: f64,
+        b: f64,
+        a: f64,
     }
-    variant gpu-color-dict-or-list-float64 {
+    variant gpu-color-dict-or-list-f64 {
         gpu-color-dict(gpu-color-dict),
-        list-float64(list<float64>),
+        list-f64(list<f64>),
     }
     record gpu-origin2-d-dict {
         x: option<gpu-integer-coordinate>,
