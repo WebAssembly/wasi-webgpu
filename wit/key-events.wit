@@ -4,8 +4,9 @@ package wasi:webgpu;
 
 interface key-events {
     use wasi:io/poll@0.2.0.{pollable};
+    use mini-canvas.{mini-canvas};
 
-    up-listener: func() -> key-up-listener;
+    up-listener: func(mini-canvas: borrow<mini-canvas>) -> key-up-listener;
 
     resource key-up-listener {
         subscribe: func() -> pollable;
@@ -13,7 +14,7 @@ interface key-events {
         get: func() -> option<key-event>;
     }
 
-    down-listener: func() -> key-down-listener;
+    down-listener: func(mini-canvas: borrow<mini-canvas>) -> key-down-listener;
 
     resource key-down-listener {
         subscribe: func() -> pollable;
