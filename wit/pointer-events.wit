@@ -4,8 +4,9 @@ package wasi:webgpu;
 
 interface pointer-events {
     use wasi:io/poll@0.2.0.{pollable};
+    use mini-canvas.{mini-canvas};
 
-    up-listener: func() -> pointer-up-listener;
+    up-listener: func(mini-canvas: borrow<mini-canvas>) -> pointer-up-listener;
 
     resource pointer-up-listener {
         subscribe: func() -> pollable;
@@ -13,7 +14,7 @@ interface pointer-events {
         get: func() -> option<pointer-event>;
     }
 
-    down-listener: func() -> pointer-down-listener;
+    down-listener: func(mini-canvas: borrow<mini-canvas>) -> pointer-down-listener;
 
     resource pointer-down-listener {
         subscribe: func() -> pollable;
@@ -21,7 +22,7 @@ interface pointer-events {
         get: func() -> option<pointer-event>;
     }
 
-    move-listener: func() -> pointer-move-listener;
+    move-listener: func(mini-canvas: borrow<mini-canvas>) -> pointer-move-listener;
 
     resource pointer-move-listener {
         subscribe: func() -> pollable;

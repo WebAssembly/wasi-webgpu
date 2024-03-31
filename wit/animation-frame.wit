@@ -6,8 +6,9 @@ package wasi:webgpu;
 /// Should update as fast as the users display can, but not faster.
 interface animation-frame {
     use wasi:io/poll@0.2.0.{pollable};
+    use mini-canvas.{mini-canvas};
 
-    listener: func() -> frame-listener;
+    listener: func(mini-canvas: borrow<mini-canvas>) -> frame-listener;
 
     resource frame-listener {
         subscribe: func() -> pollable;
