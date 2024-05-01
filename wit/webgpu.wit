@@ -396,8 +396,13 @@ interface webgpu {
         set-label: func(label: string);
         get-bind-group-layout: func(index: u32) -> gpu-bind-group-layout;
     }
+    variant gpu-pipeline-layout-or-gpu-auto-layout-mode {
+        gpu-pipeline-layout(borrow<gpu-pipeline-layout>),
+        gpu-auto-layout-mode(gpu-auto-layout-mode),
+    }
     record gpu-compute-pipeline-descriptor {
         compute: gpu-programmable-stage,
+        layout: gpu-pipeline-layout-or-gpu-auto-layout-mode,
     }
     resource gpu-render-pipeline {
         label: func() -> string;
