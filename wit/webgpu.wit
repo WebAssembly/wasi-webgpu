@@ -905,7 +905,7 @@ interface webgpu {
         set-pipeline: func(pipeline: borrow<gpu-compute-pipeline>);
         dispatch-workgroups: func(workgroup-count-x: gpu-size32, workgroup-count-y: option<gpu-size32>, workgroup-count-z: option<gpu-size32>);
         dispatch-workgroups-indirect: func(indirect-buffer: gpu-buffer, indirect-offset: gpu-size64);
-        end: func();
+        end: static func(self: gpu-compute-pass-encoder, non-standard-encoder: borrow<gpu-command-encoder>);
         label: func() -> string;
         set-label: func(label: string);
         push-debug-group: func(group-label: string);
