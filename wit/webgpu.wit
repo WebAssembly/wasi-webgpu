@@ -376,7 +376,7 @@ interface webgpu {
         set-label: func(label: string);
     }
     record gpu-bind-group-descriptor {
-        layout: gpu-bind-group-layout,
+        layout: borrow<gpu-bind-group-layout>,
         entries: list<gpu-bind-group-entry>,
         label: option<string>,
     }
@@ -420,7 +420,7 @@ interface webgpu {
     resource gpu-command-encoder {
         begin-render-pass: func(descriptor: gpu-render-pass-descriptor) -> gpu-render-pass-encoder;
         begin-compute-pass: func(descriptor: option<gpu-compute-pass-descriptor>) -> gpu-compute-pass-encoder;
-        copy-buffer-to-buffer: func(source: gpu-buffer, source-offset: gpu-size64, destination: gpu-buffer, destination-offset: gpu-size64, size: gpu-size64);
+        copy-buffer-to-buffer: func(source: borrow<gpu-buffer>, source-offset: gpu-size64, destination: borrow<gpu-buffer>, destination-offset: gpu-size64, size: gpu-size64);
         copy-buffer-to-texture: func(source: gpu-image-copy-buffer, destination: gpu-image-copy-texture, copy-size: gpu-extent3-d);
         copy-texture-to-buffer: func(source: gpu-image-copy-texture, destination: gpu-image-copy-buffer, copy-size: gpu-extent3-d);
         copy-texture-to-texture: func(source: gpu-image-copy-texture, destination: gpu-image-copy-texture, copy-size: gpu-extent3-d);
@@ -608,8 +608,8 @@ interface webgpu {
     variant gpu-buffer-binding-or-gpu-external-texture-or-gpu-sampler-or-gpu-texture-view {
         gpu-buffer-binding(gpu-buffer-binding),
         gpu-external-texture(gpu-external-texture),
-        gpu-sampler(gpu-sampler),
-        gpu-texture-view(gpu-texture-view),
+        gpu-sampler(borrow<gpu-sampler>),
+        gpu-texture-view(borrow<gpu-texture-view>),
     }
     type gpu-binding-resource = gpu-buffer-binding-or-gpu-external-texture-or-gpu-sampler-or-gpu-texture-view;
     resource gpu-compilation-info {
