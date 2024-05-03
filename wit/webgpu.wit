@@ -691,7 +691,6 @@ interface webgpu {
         alpha-to-coverage-enabled: option<bool>,
     }
     record gpu-fragment-state {
-        // TODO: Panic in runtime with this enabled. Need to figure out why.
         targets: list<gpu-color-target-state>,
         module: borrow<gpu-shader-module>,
         entry-point: string,
