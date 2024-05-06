@@ -919,7 +919,7 @@ interface webgpu {
     }
     type gpu-buffer-dynamic-offset = u32;
     record gpu-compute-pass-timestamp-writes {
-        query-set: gpu-query-set,
+        query-set: borrow<gpu-query-set>,
         beginning-of-pass-write-index: option<gpu-size32>,
         end-of-pass-write-index: option<gpu-size32>,
     }
