@@ -691,7 +691,7 @@ interface webgpu {
         alpha-to-coverage-enabled: option<bool>,
     }
     record gpu-fragment-state {
-        targets: list<gpu-color-target-state>,
+        targets: list<option<gpu-color-target-state>>,
         module: borrow<gpu-shader-module>,
         entry-point: string,
         // record<USVString, GPUPipelineConstantValue> constants;
