@@ -71,7 +71,7 @@
 <p>
 #### <a name="uint32_array"></a>`resource uint32-array`
 <p>JS built-in objects.
-These should probably be replaced with thinkgs that make sense in wit.</p>
+These should probably be replaced with things that make sense in wit.</p>
 <h4><a name="array_buffer"></a><code>resource array-buffer</code></h4>
 <h4><a name="image_bitmap"></a><code>resource image-bitmap</code></h4>
 <h4><a name="image_data"></a><code>resource image-data</code></h4>
@@ -546,8 +546,8 @@ write,
 <ul>
 <li><a name="gpu_buffer_binding_or_gpu_external_texture_or_gpu_sampler_or_gpu_texture_view.gpu_buffer_binding"></a><a href="#gpu_buffer_binding"><code>gpu-buffer-binding</code></a>: <a href="#gpu_buffer_binding"><a href="#gpu_buffer_binding"><code>gpu-buffer-binding</code></a></a></li>
 <li><a name="gpu_buffer_binding_or_gpu_external_texture_or_gpu_sampler_or_gpu_texture_view.gpu_external_texture"></a><a href="#gpu_external_texture"><code>gpu-external-texture</code></a>: own&lt;<a href="#gpu_external_texture"><a href="#gpu_external_texture"><code>gpu-external-texture</code></a></a>&gt;</li>
-<li><a name="gpu_buffer_binding_or_gpu_external_texture_or_gpu_sampler_or_gpu_texture_view.gpu_sampler"></a><a href="#gpu_sampler"><code>gpu-sampler</code></a>: own&lt;<a href="#gpu_sampler"><a href="#gpu_sampler"><code>gpu-sampler</code></a></a>&gt;</li>
-<li><a name="gpu_buffer_binding_or_gpu_external_texture_or_gpu_sampler_or_gpu_texture_view.gpu_texture_view"></a><a href="#gpu_texture_view"><code>gpu-texture-view</code></a>: own&lt;<a href="#gpu_texture_view"><a href="#gpu_texture_view"><code>gpu-texture-view</code></a></a>&gt;</li>
+<li><a name="gpu_buffer_binding_or_gpu_external_texture_or_gpu_sampler_or_gpu_texture_view.gpu_sampler"></a><a href="#gpu_sampler"><code>gpu-sampler</code></a>: borrow&lt;<a href="#gpu_sampler"><a href="#gpu_sampler"><code>gpu-sampler</code></a></a>&gt;</li>
+<li><a name="gpu_buffer_binding_or_gpu_external_texture_or_gpu_sampler_or_gpu_texture_view.gpu_texture_view"></a><a href="#gpu_texture_view"><code>gpu-texture-view</code></a>: borrow&lt;<a href="#gpu_texture_view"><a href="#gpu_texture_view"><code>gpu-texture-view</code></a></a>&gt;</li>
 </ul>
 <h4><a name="gpu_binding_resource"></a><code>type gpu-binding-resource</code></h4>
 <p><a href="#gpu_buffer_binding_or_gpu_external_texture_or_gpu_sampler_or_gpu_texture_view"><a href="#gpu_buffer_binding_or_gpu_external_texture_or_gpu_sampler_or_gpu_texture_view"><code>gpu-buffer-binding-or-gpu-external-texture-or-gpu-sampler-or-gpu-texture-view</code></a></a></p>
@@ -561,7 +561,7 @@ write,
 <h4><a name="gpu_bind_group_descriptor"></a><code>record gpu-bind-group-descriptor</code></h4>
 <h5>Record Fields</h5>
 <ul>
-<li><a name="gpu_bind_group_descriptor.layout"></a><code>layout</code>: own&lt;<a href="#gpu_bind_group_layout"><a href="#gpu_bind_group_layout"><code>gpu-bind-group-layout</code></a></a>&gt;</li>
+<li><a name="gpu_bind_group_descriptor.layout"></a><code>layout</code>: borrow&lt;<a href="#gpu_bind_group_layout"><a href="#gpu_bind_group_layout"><code>gpu-bind-group-layout</code></a></a>&gt;</li>
 <li><a name="gpu_bind_group_descriptor.entries"></a><code>entries</code>: list&lt;<a href="#gpu_bind_group_entry"><a href="#gpu_bind_group_entry"><code>gpu-bind-group-entry</code></a></a>&gt;</li>
 <li><a name="gpu_bind_group_descriptor.label"></a><code>label</code>: option&lt;<code>string</code>&gt;</li>
 </ul>
@@ -570,6 +570,12 @@ write,
 <h5>Enum Cases</h5>
 <ul>
 <li><a name="gpu_auto_layout_mode.auto"></a><code>auto</code></li>
+</ul>
+<h4><a name="gpu_pipeline_layout_or_gpu_auto_layout_mode"></a><code>variant gpu-pipeline-layout-or-gpu-auto-layout-mode</code></h4>
+<h5>Variant Cases</h5>
+<ul>
+<li><a name="gpu_pipeline_layout_or_gpu_auto_layout_mode.gpu_pipeline_layout"></a><a href="#gpu_pipeline_layout"><code>gpu-pipeline-layout</code></a>: borrow&lt;<a href="#gpu_pipeline_layout"><a href="#gpu_pipeline_layout"><code>gpu-pipeline-layout</code></a></a>&gt;</li>
+<li><a name="gpu_pipeline_layout_or_gpu_auto_layout_mode.gpu_auto_layout_mode"></a><a href="#gpu_auto_layout_mode"><code>gpu-auto-layout-mode</code></a>: <a href="#gpu_auto_layout_mode"><a href="#gpu_auto_layout_mode"><code>gpu-auto-layout-mode</code></a></a></li>
 </ul>
 <h4><a name="gpu_auto_layout_mode_or_gpu_pipeline_layout"></a><code>variant gpu-auto-layout-mode-or-gpu-pipeline-layout</code></h4>
 <h5>Variant Cases</h5>
@@ -633,6 +639,7 @@ write,
 <h5>Record Fields</h5>
 <ul>
 <li><a name="gpu_compute_pipeline_descriptor.compute"></a><code>compute</code>: <a href="#gpu_programmable_stage"><a href="#gpu_programmable_stage"><code>gpu-programmable-stage</code></a></a></li>
+<li><a name="gpu_compute_pipeline_descriptor.layout"></a><code>layout</code>: <a href="#gpu_pipeline_layout_or_gpu_auto_layout_mode"><a href="#gpu_pipeline_layout_or_gpu_auto_layout_mode"><code>gpu-pipeline-layout-or-gpu-auto-layout-mode</code></a></a></li>
 </ul>
 <h4><a name="gpu_pipeline_constant_value"></a><code>type gpu-pipeline-constant-value</code></h4>
 <p><code>float64</code></p>
@@ -742,16 +749,9 @@ write,
 <h4><a name="gpu_fragment_state"></a><code>record gpu-fragment-state</code></h4>
 <h5>Record Fields</h5>
 <ul>
-<li>
-<p><a name="gpu_fragment_state.targets"></a><code>targets</code>: list&lt;<a href="#gpu_color_target_state"><a href="#gpu_color_target_state"><code>gpu-color-target-state</code></a></a>&gt;</p>
-<p>TODO: Panic in runtime with this enabled. Need to figure out why.
-</li>
-<li>
-<p><a name="gpu_fragment_state.module"></a><code>module</code>: borrow&lt;<a href="#gpu_shader_module"><a href="#gpu_shader_module"><code>gpu-shader-module</code></a></a>&gt;</p>
-</li>
-<li>
-<p><a name="gpu_fragment_state.entry_point"></a><code>entry-point</code>: <code>string</code></p>
-</li>
+<li><a name="gpu_fragment_state.targets"></a><code>targets</code>: list&lt;option&lt;<a href="#gpu_color_target_state"><a href="#gpu_color_target_state"><code>gpu-color-target-state</code></a></a>&gt;&gt;</li>
+<li><a name="gpu_fragment_state.module"></a><code>module</code>: borrow&lt;<a href="#gpu_shader_module"><a href="#gpu_shader_module"><code>gpu-shader-module</code></a></a>&gt;</li>
+<li><a name="gpu_fragment_state.entry_point"></a><code>entry-point</code>: <code>string</code></li>
 </ul>
 <h4><a name="gpu_stencil_value"></a><code>type gpu-stencil-value</code></h4>
 <p><code>u32</code></p>
@@ -911,7 +911,7 @@ write,
 #### <a name="gpu_compute_pass_timestamp_writes"></a>`record gpu-compute-pass-timestamp-writes`
 <h5>Record Fields</h5>
 <ul>
-<li><a name="gpu_compute_pass_timestamp_writes.query_set"></a><code>query-set</code>: own&lt;<a href="#gpu_query_set"><a href="#gpu_query_set"><code>gpu-query-set</code></a></a>&gt;</li>
+<li><a name="gpu_compute_pass_timestamp_writes.query_set"></a><code>query-set</code>: borrow&lt;<a href="#gpu_query_set"><a href="#gpu_query_set"><code>gpu-query-set</code></a></a>&gt;</li>
 <li><a name="gpu_compute_pass_timestamp_writes.beginning_of_pass_write_index"></a><code>beginning-of-pass-write-index</code>: option&lt;<a href="#gpu_size32"><a href="#gpu_size32"><code>gpu-size32</code></a></a>&gt;</li>
 <li><a name="gpu_compute_pass_timestamp_writes.end_of_pass_write_index"></a><code>end-of-pass-write-index</code>: option&lt;<a href="#gpu_size32"><a href="#gpu_size32"><code>gpu-size32</code></a></a>&gt;</li>
 </ul>
@@ -2224,9 +2224,9 @@ get-mapped-range: func(offset: option<gpu-size64>, size: option<gpu-size64>) -&g
 <h5>Params</h5>
 <ul>
 <li><a name="method_gpu_command_encoder.copy_buffer_to_buffer.self"></a><code>self</code>: borrow&lt;<a href="#gpu_command_encoder"><a href="#gpu_command_encoder"><code>gpu-command-encoder</code></a></a>&gt;</li>
-<li><a name="method_gpu_command_encoder.copy_buffer_to_buffer.source"></a><code>source</code>: own&lt;<a href="#gpu_buffer"><a href="#gpu_buffer"><code>gpu-buffer</code></a></a>&gt;</li>
+<li><a name="method_gpu_command_encoder.copy_buffer_to_buffer.source"></a><code>source</code>: borrow&lt;<a href="#gpu_buffer"><a href="#gpu_buffer"><code>gpu-buffer</code></a></a>&gt;</li>
 <li><a name="method_gpu_command_encoder.copy_buffer_to_buffer.source_offset"></a><code>source-offset</code>: <a href="#gpu_size64"><a href="#gpu_size64"><code>gpu-size64</code></a></a></li>
-<li><a name="method_gpu_command_encoder.copy_buffer_to_buffer.destination"></a><code>destination</code>: own&lt;<a href="#gpu_buffer"><a href="#gpu_buffer"><code>gpu-buffer</code></a></a>&gt;</li>
+<li><a name="method_gpu_command_encoder.copy_buffer_to_buffer.destination"></a><code>destination</code>: borrow&lt;<a href="#gpu_buffer"><a href="#gpu_buffer"><code>gpu-buffer</code></a></a>&gt;</li>
 <li><a name="method_gpu_command_encoder.copy_buffer_to_buffer.destination_offset"></a><code>destination-offset</code>: <a href="#gpu_size64"><a href="#gpu_size64"><code>gpu-size64</code></a></a></li>
 <li><a name="method_gpu_command_encoder.copy_buffer_to_buffer.size"></a><code>size</code>: <a href="#gpu_size64"><a href="#gpu_size64"><code>gpu-size64</code></a></a></li>
 </ul>
@@ -2737,10 +2737,11 @@ get-mapped-range: func(offset: option<gpu-size64>, size: option<gpu-size64>) -&g
 <li><a name="method_gpu_compute_pass_encoder.dispatch_workgroups_indirect.indirect_buffer"></a><code>indirect-buffer</code>: own&lt;<a href="#gpu_buffer"><a href="#gpu_buffer"><code>gpu-buffer</code></a></a>&gt;</li>
 <li><a name="method_gpu_compute_pass_encoder.dispatch_workgroups_indirect.indirect_offset"></a><code>indirect-offset</code>: <a href="#gpu_size64"><a href="#gpu_size64"><code>gpu-size64</code></a></a></li>
 </ul>
-<h4><a name="method_gpu_compute_pass_encoder.end"></a><code>[method]gpu-compute-pass-encoder.end: func</code></h4>
+<h4><a name="static_gpu_compute_pass_encoder.end"></a><code>[static]gpu-compute-pass-encoder.end: func</code></h4>
 <h5>Params</h5>
 <ul>
-<li><a name="method_gpu_compute_pass_encoder.end.self"></a><code>self</code>: borrow&lt;<a href="#gpu_compute_pass_encoder"><a href="#gpu_compute_pass_encoder"><code>gpu-compute-pass-encoder</code></a></a>&gt;</li>
+<li><a name="static_gpu_compute_pass_encoder.end.self"></a><code>self</code>: own&lt;<a href="#gpu_compute_pass_encoder"><a href="#gpu_compute_pass_encoder"><code>gpu-compute-pass-encoder</code></a></a>&gt;</li>
+<li><a name="static_gpu_compute_pass_encoder.end.non_standard_encoder"></a><code>non-standard-encoder</code>: borrow&lt;<a href="#gpu_command_encoder"><a href="#gpu_command_encoder"><code>gpu-command-encoder</code></a></a>&gt;</li>
 </ul>
 <h4><a name="method_gpu_compute_pass_encoder.label"></a><code>[method]gpu-compute-pass-encoder.label: func</code></h4>
 <h5>Params</h5>
@@ -3070,6 +3071,9 @@ Should update as fast as the users display can, but not faster.</p>
 <h4><a name="pollable"></a><code>type pollable</code></h4>
 <p><a href="#pollable"><a href="#pollable"><code>pollable</code></a></a></p>
 <p>
+#### <a name="mini_canvas"></a>`type mini-canvas`
+[`mini-canvas`](#mini_canvas)
+<p>
 #### <a name="frame_listener"></a>`resource frame-listener`
 <h4><a name="frame_event"></a><code>record frame-event</code></h4>
 <h5>Record Fields</h5>
@@ -3081,6 +3085,10 @@ Can't have empty record. Would like to have a way around this.
 <hr />
 <h3>Functions</h3>
 <h4><a name="listener"></a><code>listener: func</code></h4>
+<h5>Params</h5>
+<ul>
+<li><a name="listener.mini_canvas"></a><a href="#mini_canvas"><code>mini-canvas</code></a>: borrow&lt;<a href="#mini_canvas"><a href="#mini_canvas"><code>mini-canvas</code></a></a>&gt;</li>
+</ul>
 <h5>Return values</h5>
 <ul>
 <li><a name="listener.0"></a> own&lt;<a href="#frame_listener"><a href="#frame_listener"><code>frame-listener</code></a></a>&gt;</li>
@@ -3110,6 +3118,9 @@ Can't have empty record. Would like to have a way around this.
 <h4><a name="pollable"></a><code>type pollable</code></h4>
 <p><a href="#pollable"><a href="#pollable"><code>pollable</code></a></a></p>
 <p>
+#### <a name="mini_canvas"></a>`type mini-canvas`
+[`mini-canvas`](#mini_canvas)
+<p>
 #### <a name="pointer_up_listener"></a>`resource pointer-up-listener`
 <h4><a name="pointer_down_listener"></a><code>resource pointer-down-listener</code></h4>
 <h4><a name="pointer_move_listener"></a><code>resource pointer-move-listener</code></h4>
@@ -3122,6 +3133,10 @@ Can't have empty record. Would like to have a way around this.
 <hr />
 <h3>Functions</h3>
 <h4><a name="up_listener"></a><code>up-listener: func</code></h4>
+<h5>Params</h5>
+<ul>
+<li><a name="up_listener.mini_canvas"></a><a href="#mini_canvas"><code>mini-canvas</code></a>: borrow&lt;<a href="#mini_canvas"><a href="#mini_canvas"><code>mini-canvas</code></a></a>&gt;</li>
+</ul>
 <h5>Return values</h5>
 <ul>
 <li><a name="up_listener.0"></a> own&lt;<a href="#pointer_up_listener"><a href="#pointer_up_listener"><code>pointer-up-listener</code></a></a>&gt;</li>
@@ -3145,6 +3160,10 @@ Can't have empty record. Would like to have a way around this.
 <li><a name="method_pointer_up_listener.get.0"></a> option&lt;<a href="#pointer_event"><a href="#pointer_event"><code>pointer-event</code></a></a>&gt;</li>
 </ul>
 <h4><a name="down_listener"></a><code>down-listener: func</code></h4>
+<h5>Params</h5>
+<ul>
+<li><a name="down_listener.mini_canvas"></a><a href="#mini_canvas"><code>mini-canvas</code></a>: borrow&lt;<a href="#mini_canvas"><a href="#mini_canvas"><code>mini-canvas</code></a></a>&gt;</li>
+</ul>
 <h5>Return values</h5>
 <ul>
 <li><a name="down_listener.0"></a> own&lt;<a href="#pointer_down_listener"><a href="#pointer_down_listener"><code>pointer-down-listener</code></a></a>&gt;</li>
@@ -3168,6 +3187,10 @@ Can't have empty record. Would like to have a way around this.
 <li><a name="method_pointer_down_listener.get.0"></a> option&lt;<a href="#pointer_event"><a href="#pointer_event"><code>pointer-event</code></a></a>&gt;</li>
 </ul>
 <h4><a name="move_listener"></a><code>move-listener: func</code></h4>
+<h5>Params</h5>
+<ul>
+<li><a name="move_listener.mini_canvas"></a><a href="#mini_canvas"><code>mini-canvas</code></a>: borrow&lt;<a href="#mini_canvas"><a href="#mini_canvas"><code>mini-canvas</code></a></a>&gt;</li>
+</ul>
 <h5>Return values</h5>
 <ul>
 <li><a name="move_listener.0"></a> own&lt;<a href="#pointer_move_listener"><a href="#pointer_move_listener"><code>pointer-move-listener</code></a></a>&gt;</li>
@@ -3197,6 +3220,9 @@ Can't have empty record. Would like to have a way around this.
 <h4><a name="pollable"></a><code>type pollable</code></h4>
 <p><a href="#pollable"><a href="#pollable"><code>pollable</code></a></a></p>
 <p>
+#### <a name="mini_canvas"></a>`type mini-canvas`
+[`mini-canvas`](#mini_canvas)
+<p>
 #### <a name="key_up_listener"></a>`resource key-up-listener`
 <h4><a name="key_down_listener"></a><code>resource key-down-listener</code></h4>
 <h4><a name="key_event"></a><code>record key-event</code></h4>
@@ -3225,6 +3251,10 @@ Can't have empty record. Would like to have a way around this.
 <hr />
 <h3>Functions</h3>
 <h4><a name="up_listener"></a><code>up-listener: func</code></h4>
+<h5>Params</h5>
+<ul>
+<li><a name="up_listener.mini_canvas"></a><a href="#mini_canvas"><code>mini-canvas</code></a>: borrow&lt;<a href="#mini_canvas"><a href="#mini_canvas"><code>mini-canvas</code></a></a>&gt;</li>
+</ul>
 <h5>Return values</h5>
 <ul>
 <li><a name="up_listener.0"></a> own&lt;<a href="#key_up_listener"><a href="#key_up_listener"><code>key-up-listener</code></a></a>&gt;</li>
@@ -3248,6 +3278,10 @@ Can't have empty record. Would like to have a way around this.
 <li><a name="method_key_up_listener.get.0"></a> option&lt;<a href="#key_event"><a href="#key_event"><code>key-event</code></a></a>&gt;</li>
 </ul>
 <h4><a name="down_listener"></a><code>down-listener: func</code></h4>
+<h5>Params</h5>
+<ul>
+<li><a name="down_listener.mini_canvas"></a><a href="#mini_canvas"><code>mini-canvas</code></a>: borrow&lt;<a href="#mini_canvas"><a href="#mini_canvas"><code>mini-canvas</code></a></a>&gt;</li>
+</ul>
 <h5>Return values</h5>
 <ul>
 <li><a name="down_listener.0"></a> own&lt;<a href="#key_down_listener"><a href="#key_down_listener"><code>key-down-listener</code></a></a>&gt;</li>
@@ -3279,13 +3313,21 @@ Can't have empty record. Would like to have a way around this.
 #### <a name="graphics_context_buffer"></a>`type graphics-context-buffer`
 [`graphics-context-buffer`](#graphics_context_buffer)
 <p>
-#### <a name="frame_buffer"></a>`resource frame-buffer`
+#### <a name="surface"></a>`resource surface`
+<p>think this needs a better name.</p>
+<h4><a name="frame_buffer"></a><code>resource frame-buffer</code></h4>
 <hr />
 <h3>Functions</h3>
-<h4><a name="connect_graphics_context"></a><code>connect-graphics-context: func</code></h4>
+<h4><a name="constructor_surface"></a><code>[constructor]surface: func</code></h4>
+<h5>Return values</h5>
+<ul>
+<li><a name="constructor_surface.0"></a> own&lt;<a href="#surface"><a href="#surface"><code>surface</code></a></a>&gt;</li>
+</ul>
+<h4><a name="method_surface.connect_graphics_context"></a><code>[method]surface.connect-graphics-context: func</code></h4>
 <h5>Params</h5>
 <ul>
-<li><a name="connect_graphics_context.context"></a><code>context</code>: borrow&lt;<a href="#graphics_context"><a href="#graphics_context"><code>graphics-context</code></a></a>&gt;</li>
+<li><a name="method_surface.connect_graphics_context.self"></a><code>self</code>: borrow&lt;<a href="#surface"><a href="#surface"><code>surface</code></a></a>&gt;</li>
+<li><a name="method_surface.connect_graphics_context.context"></a><code>context</code>: borrow&lt;<a href="#graphics_context"><a href="#graphics_context"><code>graphics-context</code></a></a>&gt;</li>
 </ul>
 <h4><a name="static_frame_buffer.from_graphics_buffer"></a><code>[static]frame-buffer.from-graphics-buffer: func</code></h4>
 <h5>Params</h5>
