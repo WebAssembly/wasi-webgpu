@@ -4,7 +4,7 @@ interface webgpu {
     use graphics-context.{graphics-context, graphics-context-buffer};
 
     // JS built-in objects.
-    // These should probably be replaced with thinkgs that make sense in wit.
+    // These should probably be replaced with things that make sense in wit.
     resource uint32-array { }
     resource array-buffer { }
     resource image-bitmap { }
