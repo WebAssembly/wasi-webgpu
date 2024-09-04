@@ -424,7 +424,7 @@ interface webgpu {
         copy-buffer-to-texture: func(source: gpu-image-copy-buffer, destination: gpu-image-copy-texture, copy-size: gpu-extent3-d);
         copy-texture-to-buffer: func(source: gpu-image-copy-texture, destination: gpu-image-copy-buffer, copy-size: gpu-extent3-d);
         copy-texture-to-texture: func(source: gpu-image-copy-texture, destination: gpu-image-copy-texture, copy-size: gpu-extent3-d);
-        clear-buffer: func(buffer: gpu-buffer, offset: option<gpu-size64>, size: option<gpu-size64>);
+        clear-buffer: func(buffer: borrow<gpu-buffer>, offset: option<gpu-size64>, size: option<gpu-size64>);
         resolve-query-set: func(query-set: gpu-query-set, first-query: gpu-size32, query-count: gpu-size32, destination: gpu-buffer, destination-offset: gpu-size64);
         finish: static func(command-encoder: gpu-command-encoder, descriptor: option<gpu-command-buffer-descriptor>) -> gpu-command-buffer;
         label: func() -> string;
@@ -446,7 +446,7 @@ interface webgpu {
         set-bind-group: func(index: gpu-index32, bind-group: borrow<gpu-bind-group>, dynamic-offsets: option<list<gpu-buffer-dynamic-offset>>);
         // set-bind-group: func(index: gpu-index32, bind-group: gpu-bind-group, dynamic-offsets-data: uint32-array, dynamic-offsets-data-start: gpu-size64, dynamic-offsets-data-length: gpu-size32);
         set-pipeline: func(pipeline: borrow<gpu-render-pipeline>);
-        set-index-buffer: func(buffer: gpu-buffer, index-format: gpu-index-format, offset: option<gpu-size64>, size: option<gpu-size64>);
+        set-index-buffer: func(buffer: borrow<gpu-buffer>, index-format: gpu-index-format, offset: option<gpu-size64>, size: option<gpu-size64>);
         set-vertex-buffer: func(slot: gpu-index32, buffer: borrow<gpu-buffer>, offset: option<gpu-size64>, size: option<gpu-size64>);
         draw: func(vertex-count: gpu-size32, instance-count: option<gpu-size32>, first-vertex: option<gpu-size32>, first-instance: option<gpu-size32>);
         draw-indexed: func(index-count: gpu-size32, instance-count: option<gpu-size32>, first-index: option<gpu-size32>, base-vertex: option<gpu-signed-offset32>, first-instance: option<gpu-size32>);
@@ -832,7 +832,7 @@ interface webgpu {
         rows-per-image: option<gpu-size32>,
     }
     record gpu-image-copy-buffer {
-        buffer: gpu-buffer,
+        buffer: borrow<gpu-buffer>,
     }
     type gpu-origin3-d = gpu-origin3-d-dict-or-list-gpu-integer-coordinate;
     record gpu-image-copy-texture {
@@ -885,7 +885,7 @@ interface webgpu {
         set-bind-group: func(index: gpu-index32, bind-group: borrow<gpu-bind-group>, dynamic-offsets: option<list<gpu-buffer-dynamic-offset>>);
         // set-bind-group: func(index: gpu-index32, bind-group: gpu-bind-group, dynamic-offsets-data: uint32-array, dynamic-offsets-data-start: gpu-size64, dynamic-offsets-data-length: gpu-size32);
         set-pipeline: func(pipeline: borrow<gpu-render-pipeline>);
-        set-index-buffer: func(buffer: gpu-buffer, index-format: gpu-index-format, offset: gpu-size64, size: gpu-size64);
+        set-index-buffer: func(buffer: borrow<gpu-buffer>, index-format: gpu-index-format, offset: gpu-size64, size: gpu-size64);
         set-vertex-buffer: func(slot: gpu-index32, buffer: borrow<gpu-buffer>, offset: gpu-size64, size: gpu-size64);
         draw: func(vertex-count: gpu-size32, instance-count: gpu-size32, first-vertex: gpu-size32, first-instance: gpu-size32);
         draw-indexed: func(index-count: gpu-size32, instance-count: gpu-size32, first-index: gpu-size32, base-vertex: gpu-signed-offset32, first-instance: gpu-size32);
@@ -895,7 +895,7 @@ interface webgpu {
     record gpu-render-pass-descriptor {
         color-attachments: list<gpu-render-pass-color-attachment>,
         depth-stencil-attachment: option<gpu-render-pass-depth-stencil-attachment>,
-        occlusion-query-set: option<gpu-query-set>,
+        occlusion-query-set: option<borrow<gpu-query-set>>,
         timestamp-writes: option<gpu-render-pass-timestamp-writes>,
         max-draw-count: option<gpu-size64>,
         label: option<string>,
@@ -929,14 +929,14 @@ interface webgpu {
         set-label: func(label: string);
     }
     record gpu-render-pass-timestamp-writes {
-        query-set: gpu-query-set,
+        query-set: borrow<gpu-query-set>,
         beginning-of-pass-write-index: option<gpu-size32>,
         end-of-pass-write-index: option<gpu-size32>,
     }
     record gpu-render-pass-color-attachment {
-        view: gpu-texture-view,
+        view: borrow<gpu-texture-view>,
         depth-slice: option<gpu-integer-coordinate>,
-        resolve-target: option<gpu-texture-view>,
+        resolve-target: option<borrow<gpu-texture-view>>,
         clear-value: option<gpu-color>,
         load-op: gpu-load-op,
         store-op: gpu-store-op,
