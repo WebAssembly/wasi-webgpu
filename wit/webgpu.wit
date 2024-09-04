@@ -833,6 +833,9 @@ interface webgpu {
     }
     record gpu-image-copy-buffer {
         buffer: borrow<gpu-buffer>,
+        offset: option<gpu-size64>,
+        bytes-per-row: option<gpu-size32>,
+        rows-per-image: option<gpu-size32>,
     }
     type gpu-origin3-d = gpu-origin3-d-dict-or-list-gpu-integer-coordinate;
     record gpu-image-copy-texture {
