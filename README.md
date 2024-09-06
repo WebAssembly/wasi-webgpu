@@ -36,12 +36,12 @@ TODO before entering Phase 2.
 
 This proposal is a collection of multiple interfaces.
 
-| Interface             | Description                                                                       |
-| ----------------------| --------------------------------------------------------------------------------- |
-| wasi-webgpu           | WebGPU interface for interacting with GPUs                                        |
-| wasi-frame-buffer     | A CPU based graphics API                                                          |
-| wasi-canvas           | A canvas/surface interface                                                        |
-| wasi-graphics-context | A small interface connecting the graphics APIs (webgpu or frame-buffer) to canvas |
+| Interface             | Description                                                                        |
+| ----------------------| ---------------------------------------------------------------------------------- |
+| wasi-webgpu           | WebGPU interface for interacting with GPUs                                         |
+| wasi-frame-buffer     | A CPU based graphics API                                                           |
+| wasi-surface          | A surface interface                                                                |
+| wasi-graphics-context | A small interface connecting the graphics APIs (webgpu or frame-buffer) to surface |
 
 
 ### Goals [or Motivating Use Cases, or Scenarios]

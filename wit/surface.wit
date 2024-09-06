@@ -1,6 +1,6 @@
 package wasi:webgpu;
 
-interface mini-canvas {
+interface surface {
     use graphics-context.{graphics-context};
     use wasi:io/poll@0.2.0.{pollable};
 
@@ -10,7 +10,7 @@ interface mini-canvas {
         offscreen: bool,
     }
 
-    resource mini-canvas {
+    resource surface {
         constructor(desc: create-desc);
 
         connect-graphics-context: func(context: borrow<graphics-context>);
