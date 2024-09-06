@@ -15,16 +15,29 @@ interface mini-canvas {
 
         connect-graphics-context: func(context: borrow<graphics-context>);
 
-        resize-listener: func() -> resize-listener;
-
         height: func() -> u32;
         width: func() -> u32;
-    }
 
-    resource resize-listener {
-        subscribe: func() -> pollable;
+        subscribe-resize: func() -> pollable;
+        get-resize: func() -> option<resize-event>;
 
-        get: func() -> option<resize-event>;
+        subscribe-frame: func() -> pollable;
+        get-frame: func() -> option<frame-event>;
+
+        subscribe-up: func() -> pollable;
+        get-up: func() -> option<pointer-event>;
+
+        subscribe-down: func() -> pollable;
+        get-down: func() -> option<pointer-event>;
+
+        subscribe-move: func() -> pollable;
+        get-move: func() -> option<pointer-event>;
+
+        subscribe-key-up: func() -> pollable;
+        get-key-up: func() -> option<key-event>;
+
+        subscribe-key-down: func() -> pollable;
+        get-key-down: func() -> option<key-event>;
     }
 
     record resize-event {
@@ -32,4 +45,24 @@ interface mini-canvas {
         width: u32,
     }
 
+    record frame-event {
+        /// This field doesn't mean anything.
+        // Can't have empty record. Would like to have a way around this.
+        nothing: bool,
+    }
+
+    record pointer-event {
+        x: f64,
+        y: f64,
+    }
+
+    record key-event {
+        // should `code` and `key` be enums?
+        code: string,
+        key: string,
+        alt-key: bool,
+        ctrl-key: bool,
+        meta-key: bool,
+        shift-key: bool,
+    }
 }
