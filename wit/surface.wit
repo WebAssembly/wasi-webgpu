@@ -24,14 +24,14 @@ interface surface {
         subscribe-frame: func() -> pollable;
         get-frame: func() -> option<frame-event>;
 
-        subscribe-up: func() -> pollable;
-        get-up: func() -> option<pointer-event>;
+        subscribe-pointer-up: func() -> pollable;
+        get-pointer-up: func() -> option<pointer-event>;
 
-        subscribe-down: func() -> pollable;
-        get-down: func() -> option<pointer-event>;
+        subscribe-pointer-down: func() -> pollable;
+        get-pointer-down: func() -> option<pointer-event>;
 
-        subscribe-move: func() -> pollable;
-        get-move: func() -> option<pointer-event>;
+        subscribe-pointer-move: func() -> pollable;
+        get-pointer-move: func() -> option<pointer-event>;
 
         subscribe-key-up: func() -> pollable;
         get-key-up: func() -> option<key-event>;
