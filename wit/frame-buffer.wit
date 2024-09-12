@@ -1,22 +1,19 @@
 package wasi:webgpu;
 
 interface frame-buffer {
-    use graphics-context.{graphics-context, graphics-context-buffer};
+    use graphics-context.{context, buffer as context-buffer};
 
-    // think this needs a better name.
-    resource surface {
+    resource device {
         constructor();
 
-        connect-graphics-context: func(context: borrow<graphics-context>);
+        connect-graphics-context: func(context: borrow<context>);
     }
 
-    resource frame-buffer {
-        from-graphics-buffer: static func(buffer: graphics-context-buffer) -> frame-buffer;
+    resource buffer {
+        from-graphics-buffer: static func(buffer: context-buffer) -> buffer;
 
-        length: func() -> u32;
-
-        get: func(i: u32) -> u32;
-
-        set: func(i: u32, val: u32);
+        // TODO: This should be replcated with something that doesn't require a copy.
+        get: func() -> list<u8>;
+        set: func(val: list<u8>);
     }
 }

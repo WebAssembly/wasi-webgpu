@@ -1,36 +1,14 @@
 package wasi:webgpu;
 
 interface graphics-context {
-
-    resource graphics-context {
+    resource context {
         constructor();
 
-        configure: func(desc: configure-context-desc);
+        get-current-buffer: func() -> buffer;
 
-        get-current-buffer: func() -> graphics-context-buffer;
-
+        // TODO: might want to remove this.
         present: func();
     }
 
-    // might not make sense here
-    record configure-context-desc {
-        alpha-mode: composite-alpha-mode,
-        // colorSpace
-        // device?
-        // usage?
-        // format?
-        // viewFormats?
-        // getPreferredCanvasFormat?
-    }
-
-    resource graphics-context-buffer {
-    }
-
-    enum composite-alpha-mode {
-        auto,
-        opaque,
-        pre-multiplied,
-        post-multiplied,
-        inherit,
-    }
+    resource buffer { }
 }

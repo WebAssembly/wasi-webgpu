@@ -1,7 +1,7 @@
 package wasi:webgpu;
 
 interface webgpu {
-    use graphics-context.{graphics-context, graphics-context-buffer};
+    use graphics-context.{context, buffer as graphics-context-buffer};
 
     // JS built-in objects.
     // These should probably be replaced with things that make sense in wit.
@@ -186,7 +186,7 @@ interface webgpu {
         high-performance,
     }
     resource gpu-device {
-        connect-graphics-context: func(context: borrow<graphics-context>);
+        connect-graphics-context: func(context: borrow<context>);
         features: func() -> gpu-supported-features;
         limits: func() -> gpu-supported-limits;
         queue: func() -> gpu-queue;
@@ -213,6 +213,14 @@ interface webgpu {
         push-error-scope: func(filter: gpu-error-filter);
         pop-error-scope: func() -> gpu-error;
         onuncapturederror: func() -> event-handler;
+        configure: func(configuration: gpu-device-configuration);
+    }
+    record gpu-device-configuration {
+        format: gpu-texture-format,
+        usage: option<gpu-texture-usage-flags>,
+        view-formats: option<list<gpu-texture-format>>,
+        color-space: option<borrow<predefined-color-space>>,
+        alpha-mode: option<gpu-canvas-alpha-mode>,
     }
     record gpu-device-descriptor {
         required-features: option<list<gpu-feature-name>>,
@@ -247,11 +255,10 @@ interface webgpu {
         label: func() -> string;
         set-label: func(label: string);
     }
-    resource remote-buffer {
-        // what about wasm64? Use u64?
-        length: func() -> u32;
-        get: func(i: u32) -> u8;
-        set: func(i: u32, val: u8);
+    // TODO: This should be replcated with something that doesn't require a copy.
+    resource temp-buffer {
+        get: func() -> list<u8>;
+        set: func(val: list<u8>);
     }
     resource gpu-buffer {
         size: func() -> gpu-size64-out;
@@ -260,7 +267,7 @@ interface webgpu {
         map-async: func(mode: gpu-map-mode-flags, offset: option<gpu-size64>, size: option<gpu-size64>);
         // TODO: why were these not option<T>
         // get-mapped-range: func(offset: option<gpu-size64>, size: option<gpu-size64>) -> array-buffer;
-        get-mapped-range: func(offset: option<gpu-size64>, size: option<gpu-size64>) -> remote-buffer;
+        get-mapped-range: func(offset: option<gpu-size64>, size: option<gpu-size64>) -> temp-buffer;
         unmap: func();
         destroy: func();
         label: func() -> string;
