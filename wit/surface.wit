@@ -17,7 +17,7 @@ interface surface {
         height: func() -> u32;
         width: func() -> u32;
 
-        try-set-size: func(height: option<u32>, width: option<u32>);
+        request-set-size: func(height: option<u32>, width: option<u32>);
 
         subscribe-resize: func() -> pollable;
         get-resize: func() -> option<resize-event>;
@@ -66,6 +66,8 @@ interface surface {
         shift-key: bool,
     }
 
+    // corresponds with https://w3c.github.io/uievents-code/#code-value-tables
+    // `Unidentified` is not included, use `option<key>` instead.
     enum key {
         backquote,
         backslash,
