@@ -1,7 +1,7 @@
 package wasi:webgpu;
 
 interface webgpu {
-    use graphics-context.{context, buffer as graphics-context-buffer};
+    use graphics-context.{context, abstract-buffer};
 
     // JS built-in objects.
     // These should probably be replaced with things that make sense in wit.
@@ -256,7 +256,7 @@ interface webgpu {
         set-label: func(label: string);
     }
     // TODO: This should be replcated with something that doesn't require a copy.
-    resource temp-buffer {
+    resource non-standard-buffer {
         get: func() -> list<u8>;
         set: func(val: list<u8>);
     }
@@ -267,7 +267,7 @@ interface webgpu {
         map-async: func(mode: gpu-map-mode-flags, offset: option<gpu-size64>, size: option<gpu-size64>);
         // TODO: why were these not option<T>
         // get-mapped-range: func(offset: option<gpu-size64>, size: option<gpu-size64>) -> array-buffer;
-        get-mapped-range: func(offset: option<gpu-size64>, size: option<gpu-size64>) -> temp-buffer;
+        get-mapped-range: func(offset: option<gpu-size64>, size: option<gpu-size64>) -> non-standard-buffer;
         unmap: func();
         destroy: func();
         label: func() -> string;
@@ -296,7 +296,7 @@ interface webgpu {
     //     write,
     // }
     resource gpu-texture {
-        from-graphics-buffer: static func(buffer: graphics-context-buffer) -> gpu-texture;
+        from-graphics-buffer: static func(buffer: abstract-buffer) -> gpu-texture;
         create-view: func(descriptor: option<gpu-texture-view-descriptor>) -> gpu-texture-view;
         destroy: func();
         width: func() -> gpu-integer-coordinate-out;

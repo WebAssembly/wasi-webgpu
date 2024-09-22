@@ -10,5 +10,5 @@ interface graphics-context {
         present: func();
     }
 
-    resource buffer { }
+    resource abstract-buffer { }
 }
