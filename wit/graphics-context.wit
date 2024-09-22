@@ -4,7 +4,7 @@ interface graphics-context {
     resource context {
         constructor();
 
-        get-current-buffer: func() -> buffer;
+        get-current-buffer: func() -> abstract-buffer;
 
         // TODO: might want to remove this.
         present: func();
