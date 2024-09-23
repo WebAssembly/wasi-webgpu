@@ -1,14 +1,14 @@
 package wasi:webgpu;
 
 interface graphics-context {
-    resource context {
-        constructor();
+  resource context {
+    constructor();
 
-        get-current-buffer: func() -> abstract-buffer;
+    get-current-buffer: func() -> abstract-buffer;
 
-        // TODO: might want to remove this.
-        present: func();
-    }
+    // TODO: might want to remove this.
+    present: func();
+  }
 
-    resource abstract-buffer { }
+  resource abstract-buffer { }
 }
