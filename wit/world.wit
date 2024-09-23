@@ -1,8 +1,8 @@
 package wasi:webgpu;
 
 world imports {
-    import webgpu;
-    import graphics-context;
-    import surface;
-    import frame-buffer;
+  import webgpu;
+  import graphics-context;
+  import surface;
+  import frame-buffer;
 }
