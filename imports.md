@@ -2787,6 +2787,25 @@
 <ul>
 <li><a id="method_gpu_queue_on_submitted_work_done.self"></a><code>self</code>: borrow&lt;<a href="#gpu_queue"><a href="#gpu_queue"><code>gpu-queue</code></a></a>&gt;</li>
 </ul>
+<h4><a id="method_gpu_queue_write_buffer"></a><code>[method]gpu-queue.write-buffer: func</code></h4>
+<h5>Params</h5>
+<ul>
+<li><a id="method_gpu_queue_write_buffer.self"></a><code>self</code>: borrow&lt;<a href="#gpu_queue"><a href="#gpu_queue"><code>gpu-queue</code></a></a>&gt;</li>
+<li><a id="method_gpu_queue_write_buffer.buffer"></a><a href="#buffer"><code>buffer</code></a>: borrow&lt;<a href="#gpu_buffer"><a href="#gpu_buffer"><code>gpu-buffer</code></a></a>&gt;</li>
+<li><a id="method_gpu_queue_write_buffer.buffer_offset"></a><code>buffer-offset</code>: <a href="#gpu_size64"><a href="#gpu_size64"><code>gpu-size64</code></a></a></li>
+<li><a id="method_gpu_queue_write_buffer.data_offset"></a><code>data-offset</code>: option&lt;<a href="#gpu_size64"><a href="#gpu_size64"><code>gpu-size64</code></a></a>&gt;</li>
+<li><a id="method_gpu_queue_write_buffer.data"></a><code>data</code>: list&lt;<code>u8</code>&gt;</li>
+<li><a id="method_gpu_queue_write_buffer.size"></a><code>size</code>: option&lt;<a href="#gpu_size64"><a href="#gpu_size64"><code>gpu-size64</code></a></a>&gt;</li>
+</ul>
+<h4><a id="method_gpu_queue_write_texture"></a><code>[method]gpu-queue.write-texture: func</code></h4>
+<h5>Params</h5>
+<ul>
+<li><a id="method_gpu_queue_write_texture.self"></a><code>self</code>: borrow&lt;<a href="#gpu_queue"><a href="#gpu_queue"><code>gpu-queue</code></a></a>&gt;</li>
+<li><a id="method_gpu_queue_write_texture.destination"></a><code>destination</code>: <a href="#gpu_image_copy_texture"><a href="#gpu_image_copy_texture"><code>gpu-image-copy-texture</code></a></a></li>
+<li><a id="method_gpu_queue_write_texture.data"></a><code>data</code>: list&lt;<code>u8</code>&gt;</li>
+<li><a id="method_gpu_queue_write_texture.data_layout"></a><code>data-layout</code>: <a href="#gpu_image_data_layout"><a href="#gpu_image_data_layout"><code>gpu-image-data-layout</code></a></a></li>
+<li><a id="method_gpu_queue_write_texture.size"></a><code>size</code>: <a href="#gpu_extent3_d"><a href="#gpu_extent3_d"><code>gpu-extent3-d</code></a></a></li>
+</ul>
 <h4><a id="method_gpu_queue_label"></a><code>[method]gpu-queue.label: func</code></h4>
 <h5>Params</h5>
 <ul>

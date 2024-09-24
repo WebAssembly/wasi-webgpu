@@ -720,6 +720,8 @@ interface webgpu {
   resource gpu-queue {
     submit: func(command-buffers: list<borrow<gpu-command-buffer>>);
     on-submitted-work-done: func();
+    write-buffer: func(buffer: borrow<gpu-buffer>, buffer-offset: gpu-size64, data-offset: option<gpu-size64>, data: list<u8>, size: option<gpu-size64>);
+    write-texture: func(destination: gpu-image-copy-texture, data: list<u8>, data-layout: gpu-image-data-layout, size: gpu-extent3-d);
     label: func() -> string;
     set-label: func(label: string);
   }
