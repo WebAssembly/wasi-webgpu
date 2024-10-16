@@ -55,7 +55,7 @@ This proposal is a collection of multiple packages.
 
 ### API walk-through
 
-The full API documentation can be found [here](wasi-proposal-template.md).
+The full API documentation can be found in [imports.md](imports.md).
 
 [Walk through of how someone would use this API.]
 
