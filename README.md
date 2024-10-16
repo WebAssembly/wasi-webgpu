@@ -12,8 +12,9 @@ Phase 1
 - Sean Isom 
 
 ### Portability Criteria
+WASI GFX must have host implementations which can pass the testsuite on at least Windows, macOS, and Linux.
 
-TODO before entering Phase 2.
+WASI GFX must have at least two complete independent implementations.
 
 ## Table of Contents [if the explainer is longer than one printed page]
 
