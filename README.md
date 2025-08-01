@@ -13,7 +13,7 @@ Phase 2
 
 ### Portability Criteria
 
-Linux, Window, MacOS, Android, Web.
+Linux, Windows, MacOS, Android, Web.
 
 ## Table of Contents [if the explainer is longer than one printed page]
 
