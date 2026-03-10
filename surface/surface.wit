@@ -1,11 +1,11 @@
-package wasi:surface@0.0.1;
+package wasi:surface@0.2.0-rc.1;
 
 world imports {
   import surface;
 }
 
 interface surface {
-  use wasi:graphics-context/graphics-context@0.0.1.{context};
+  use wasi:graphics-context/graphics-context@0.2.0-rc.1.{context};
   use wasi:io/poll@0.2.0.{pollable};
 
   record create-desc {

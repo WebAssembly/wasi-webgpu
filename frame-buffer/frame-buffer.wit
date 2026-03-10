@@ -1,11 +1,11 @@
-package wasi:frame-buffer@0.0.1;
+package wasi:frame-buffer@0.2.0-rc.1;
 
 world imports {
   import frame-buffer;
 }
 
 interface frame-buffer {
-  use wasi:graphics-context/graphics-context@0.0.1.{context, abstract-buffer};
+  use wasi:graphics-context/graphics-context@0.2.0-rc.1.{context, abstract-buffer};
 
   resource device {
     constructor();

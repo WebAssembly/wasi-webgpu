@@ -1,0 +1,160 @@
+name: Publish Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    name: Publish Release
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      packages: write
+      contents: write
+      attestations: write
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Extract version from package
+        id: version
+        run: |
+          # Extract version from graphics-context (canonical source)
+          VERSION=$(sed -n 's/^package wasi:graphics-context@\([^;]*\);/\1/p' graphics-context/graphics-context.wit)
+          if [[ ! "$VERSION" =~ ^0\.2\.0-rc\.[0-9]+$ ]]; then
+            echo "Error: Version '$VERSION' is not a valid RC version"
+            exit 1
+          fi
+          TAG="v${VERSION}"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "Publishing version: $VERSION"
+
+      - name: Check tag doesn't exist
+        run: |
+          if git tag -l "${{ steps.version.outputs.tag }}" | grep -q .; then
+            echo "Error: Tag ${{ steps.version.outputs.tag }} already exists"
+            exit 1
+          fi
+
+      - name: Create git tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "${{ steps.version.outputs.tag }}" -m "Release ${{ steps.version.outputs.version }}"
+          git push origin "${{ steps.version.outputs.tag }}"
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${{ steps.version.outputs.tag }}" \
+            --title "${{ steps.version.outputs.version }}" \
+            --prerelease \
+            --generate-notes
+
+      - name: Install cargo-binstall
+        uses: cargo-bins/cargo-binstall@80aaafe04903087c333980fa2686259ddd34b2d9 # v1.16.6
+
+      - name: Install wkg
+        run: cargo binstall -y "wkg@0.15.0"
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build WIT packages
+        run: |
+          for pkg in graphics-context webgpu surface frame-buffer; do
+            (cd "$pkg" && wkg wit build -d . -o "../wasi-${pkg}.wasm")
+          done
+
+      - name: Publish graphics-context
+        id: publish-graphics-context
+        uses: bytecodealliance/wkg-github-action@10b3b04b9059ba46208cd7daf7d352af14bded0f # v5
+        with:
+          oci-reference-without-tag: ghcr.io/webassembly/wasi/graphics-context
+          file: wasi-graphics-context.wasm
+          description: 'WASI Graphics Context'
+          source: https://github.com/WebAssembly/wasi-gfx
+          homepage: https://github.com/WebAssembly/wasi-gfx
+          version: ${{ steps.version.outputs.version }}
+          licenses: Apache-2.0 WITH LLVM-exception
+
+      - name: Publish webgpu
+        id: publish-webgpu
+        uses: bytecodealliance/wkg-github-action@10b3b04b9059ba46208cd7daf7d352af14bded0f # v5
+        with:
+          oci-reference-without-tag: ghcr.io/webassembly/wasi/webgpu
+          file: wasi-webgpu.wasm
+          description: 'WASI WebGPU'
+          source: https://github.com/WebAssembly/wasi-gfx
+          homepage: https://github.com/WebAssembly/wasi-gfx
+          version: ${{ steps.version.outputs.version }}
+          licenses: Apache-2.0 WITH LLVM-exception
+
+      - name: Publish surface
+        id: publish-surface
+        uses: bytecodealliance/wkg-github-action@10b3b04b9059ba46208cd7daf7d352af14bded0f # v5
+        with:
+          oci-reference-without-tag: ghcr.io/webassembly/wasi/surface
+          file: wasi-surface.wasm
+          description: 'WASI Surface'
+          source: https://github.com/WebAssembly/wasi-gfx
+          homepage: https://github.com/WebAssembly/wasi-gfx
+          version: ${{ steps.version.outputs.version }}
+          licenses: Apache-2.0 WITH LLVM-exception
+
+      - name: Publish frame-buffer
+        id: publish-frame-buffer
+        uses: bytecodealliance/wkg-github-action@10b3b04b9059ba46208cd7daf7d352af14bded0f # v5
+        with:
+          oci-reference-without-tag: ghcr.io/webassembly/wasi/frame-buffer
+          file: wasi-frame-buffer.wasm
+          description: 'WASI Frame Buffer'
+          source: https://github.com/WebAssembly/wasi-gfx
+          homepage: https://github.com/WebAssembly/wasi-gfx
+          version: ${{ steps.version.outputs.version }}
+          licenses: Apache-2.0 WITH LLVM-exception
+
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@00014ed6ed5efc5b1ab7f7f34a39eb55d41aa4f8 # v3.1.0
+        with:
+          subject-name: ghcr.io/webassembly/wasi/graphics-context
+          subject-digest: ${{ steps.publish-graphics-context.outputs.digest }}
+          push-to-registry: true
+
+      - name: Attest build provenance (webgpu)
+        uses: actions/attest-build-provenance@00014ed6ed5efc5b1ab7f7f34a39eb55d41aa4f8 # v3.1.0
+        with:
+          subject-name: ghcr.io/webassembly/wasi/webgpu
+          subject-digest: ${{ steps.publish-webgpu.outputs.digest }}
+          push-to-registry: true
+
+      - name: Attest build provenance (surface)
+        uses: actions/attest-build-provenance@00014ed6ed5efc5b1ab7f7f34a39eb55d41aa4f8 # v3.1.0
+        with:
+          subject-name: ghcr.io/webassembly/wasi/surface
+          subject-digest: ${{ steps.publish-surface.outputs.digest }}
+          push-to-registry: true
+
+      - name: Attest build provenance (frame-buffer)
+        uses: actions/attest-build-provenance@00014ed6ed5efc5b1ab7f7f34a39eb55d41aa4f8 # v3.1.0
+        with:
+          subject-name: ghcr.io/webassembly/wasi/frame-buffer
+          subject-digest: ${{ steps.publish-frame-buffer.outputs.digest }}
+          push-to-registry: true
+
+      - name: Upload wasm files to release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload "${{ steps.version.outputs.tag }}" \
+            wasi-graphics-context.wasm \
+            wasi-webgpu.wasm \
+            wasi-surface.wasm \
+            wasi-frame-buffer.wasm

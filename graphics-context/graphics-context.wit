@@ -1,4 +1,4 @@
-package wasi:graphics-context@0.0.1;
+package wasi:graphics-context@0.2.0-rc.1;
 
 world imports {
   import graphics-context;

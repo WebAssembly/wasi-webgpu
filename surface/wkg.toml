@@ -1,0 +1,2 @@
+[overrides]
+"wasi:graphics-context" = { path = "../graphics-context" }
