@@ -70,7 +70,9 @@ fn main() {
         }
     };
     let transforms = serde_json::from_str(include_str!("../webgpu-transforms.json")).unwrap();
-    let interface = wit_transforms::transform(interface, transforms);
+    let mut interface = wit_transforms::transform(interface, transforms);
+    interface.uses_mut().sort();
+    interface.items_mut().sort();
     package.item(wit_encoder::PackageItem::Interface(interface));
 
     let output = package.to_string();
