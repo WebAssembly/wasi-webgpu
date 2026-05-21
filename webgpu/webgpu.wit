@@ -351,7 +351,7 @@ interface webgpu {
     lost: func() -> future<gpu-device-lost-info>;
     push-error-scope: func(filter: gpu-error-filter);
     pop-error-scope: func() -> future<result<option<gpu-error>, pop-error-scope-error>>;
-    onuncapturederror: func() -> stream;
+    on-uncaptured-error: func() -> stream<gpu-error>;
     connect-graphics-context: func(context: borrow<context>);
   }
   record gpu-device-descriptor {

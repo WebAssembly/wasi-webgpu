@@ -1447,6 +1447,33 @@
         ]
     },
     {
+        "reason": "on-uncaptured-error should not be one long word and is of event type is gpu-error https://www.w3.org/TR/webgpu/#telemetry",
+        "operations": [
+            {
+                "operation": {
+                    "rename-func": {
+                        "resource": "gpu-device",
+                        "old-func-name": "onuncapturederror",
+                        "new-func-name": "on-uncaptured-error"
+                    }
+                }
+            },
+            {
+                "operation": {
+                    "retype-func-result": {
+                        "resource": "gpu-device",
+                        "func": "on-uncaptured-error",
+                        "new-result": {
+                            "stream": {
+                                "named": "gpu-error"
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    {
         "reason": "map-async can throw for various reasons. https://www.w3.org/TR/webgpu/#dom-gpubuffer-mapasync",
         "operations": [
             {
