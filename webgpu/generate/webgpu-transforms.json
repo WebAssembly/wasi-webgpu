@@ -905,7 +905,8 @@
                             "params": {
                                 "items": []
                             },
-                            "results": { "anon": { "named": "gpu" } }
+                            "result": {"named": "gpu" },
+                            "async-": false
                         }
                     }
                 }
@@ -927,13 +928,11 @@
             },
             {
                 "operation": {
-                    "retype-func-results": {
+                    "retype-func-result": {
                         "resource": "gpu-buffer",
                         "func": "get-mapped-range",
-                        "new-results": {
-                            "anon": {
-                                "list": "u8"
-                            }
+                        "new-result": {
+                            "list": "u8"
                         }
                     }
                 }
@@ -953,7 +952,7 @@
                         "resource": "gpu-buffer",
                         "func": {
                             "kind": {
-                                "method": ["get-mapped-range-set-with-copy", { "named": { "items": [] } }]
+                                "method": ["get-mapped-range-set-with-copy", false, null]
                             },
                             "params": {
                                 "items": [
@@ -990,7 +989,7 @@
                         "resource": "gpu-device",
                         "func": {
                             "kind": {
-                                "method": ["connect-graphics-context", { "named": { "items": [] } }]
+                                "method": ["connect-graphics-context", false, null]
                             },
                             "params": {
                                 "items": [
@@ -1007,7 +1006,7 @@
                         "resource": "gpu-texture",
                         "func": {
                             "kind": {
-                                "static": ["from-graphics-buffer", { "anon": { "named": "gpu-texture" } }]
+                                "static": ["from-graphics-buffer", false, { "named": "gpu-texture" }]
                             },
                             "params": {
                                 "items": [
@@ -1057,10 +1056,9 @@
                             "kind": {
                                 "method": [
                                     "kind",
+                                    false,
                                     {
-                                        "anon": {
-                                            "named": "gpu-error-kind"
-                                        }
+                                        "named": "gpu-error-kind"
                                     }
                                 ]
                             },
@@ -1155,19 +1153,22 @@
                 "vars": {
                     "$_SUCCESS": {
                         "find-type": {
-                            "func-results-anon": {
+                            "func-result": {
                                 "resource": "gpu-adapter",
                                 "func": "request-device"
-                            }
+                            },
+                            "unwrap-t": [
+                                "future"
+                            ]
                         }
                     }
                 },
                 "operation": {
-                    "retype-func-results": {
+                    "retype-func-result": {
                         "resource": "gpu-adapter",
                         "func": "request-device",
-                        "new-results": {
-                            "anon": {
+                        "new-result": {
+                            "future": {
                                 "result": {
                                     "ok": "$_SUCCESS",
                                     "err": {
@@ -1230,19 +1231,22 @@
                 "vars": {
                     "$_SUCCESS": {
                         "find-type": {
-                            "func-results-anon": {
+                            "func-result": {
                                 "resource": "gpu-device",
                                 "func": "create-compute-pipeline-async"
-                            }
+                            },
+                            "unwrap-t": [
+                                "future"
+                            ]
                         }
                     }
                 },
                 "operation": {
-                    "retype-func-results": {
+                    "retype-func-result": {
                         "resource": "gpu-device",
                         "func": "create-compute-pipeline-async",
-                        "new-results": {
-                            "anon": {
+                        "new-result": {
+                            "future": {
                                 "result": {
                                     "ok": "$_SUCCESS",
                                     "err": {
@@ -1258,19 +1262,22 @@
                 "vars": {
                     "$_SUCCESS": {
                         "find-type": {
-                            "func-results-anon": {
+                            "func-result": {
                                 "resource": "gpu-device",
                                 "func": "create-render-pipeline-async"
-                            }
+                            },
+                            "unwrap-t": [
+                                "future"
+                            ]
                         }
                     }
                 },
                 "operation": {
-                    "retype-func-results": {
+                    "retype-func-result": {
                         "resource": "gpu-device",
                         "func": "create-render-pipeline-async",
-                        "new-results": {
-                            "anon": {
+                        "new-result": {
+                            "future": {
                                 "result": {
                                     "ok": "$_SUCCESS",
                                     "err": {
@@ -1340,7 +1347,7 @@
                 "vars": {
                     "$_SUCCESS": {
                         "find-type": {
-                            "func-results-anon": {
+                            "func-result": {
                                 "resource": "gpu-device",
                                 "func": "create-query-set"
                             }
@@ -1348,16 +1355,14 @@
                     }
                 },
                 "operation": {
-                    "retype-func-results": {
+                    "retype-func-result": {
                         "resource": "gpu-device",
                         "func": "create-query-set",
-                        "new-results": {
-                            "anon": {
-                                "result": {
-                                    "ok": "$_SUCCESS",
-                                    "err": {
-                                        "named": "create-query-set-error"
-                                    }
+                        "new-result": {
+                            "result": {
+                                "ok": "$_SUCCESS",
+                                "err": {
+                                    "named": "create-query-set-error"
                                 }
                             }
                         }
@@ -1412,19 +1417,22 @@
                 "vars": {
                     "$_SUCCESS": {
                         "find-type": {
-                            "func-results-anon": {
+                            "func-result": {
                                 "resource": "gpu-device",
                                 "func": "pop-error-scope"
-                            }
+                            },
+                            "unwrap-t": [
+                                "future"
+                            ]
                         }
                     }
                 },
                 "operation": {
-                    "retype-func-results": {
+                    "retype-func-result": {
                         "resource": "gpu-device",
                         "func": "pop-error-scope",
-                        "new-results": {
-                            "anon": {
+                        "new-result": {
+                            "future": {
                                 "result": {
                                     "ok": "$_SUCCESS",
                                     "err": {
@@ -1488,15 +1496,13 @@
             },
             {
                 "operation": {
-                    "retype-func-results": {
+                    "retype-func-result": {
                         "resource": "gpu-buffer",
                         "func": "map-async",
-                        "new-results": {
-                            "anon": {
-                                "result": {
-                                    "err": {
-                                        "named": "map-async-error"
-                                    }
+                        "new-result": {
+                            "result": {
+                                "err": {
+                                    "named": "map-async-error"
                                 }
                             }
                         }
@@ -1557,7 +1563,7 @@
                 "vars": {
                     "$_SUCCESS": {
                         "find-type": {
-                            "func-results-anon": {
+                            "func-result": {
                                 "resource": "gpu-buffer",
                                 "func": "get-mapped-range-get-with-copy"
                             }
@@ -1565,16 +1571,14 @@
                     }
                 },
                 "operation": {
-                    "retype-func-results": {
+                    "retype-func-result": {
                         "resource": "gpu-buffer",
                         "func": "get-mapped-range-get-with-copy",
-                        "new-results": {
-                            "anon": {
-                                "result": {
-                                    "ok": "$_SUCCESS",
-                                    "err": {
-                                        "named": "get-mapped-range-error"
-                                    }
+                        "new-result": {
+                            "result": {
+                                "ok": "$_SUCCESS",
+                                "err": {
+                                    "named": "get-mapped-range-error"
                                 }
                             }
                         }
@@ -1583,15 +1587,13 @@
             },
             {
                 "operation": {
-                    "retype-func-results": {
+                    "retype-func-result": {
                         "resource": "gpu-buffer",
                         "func": "get-mapped-range-set-with-copy",
-                        "new-results": {
-                            "anon": {
-                                "result": {
-                                    "err": {
-                                        "named": "get-mapped-range-error"
-                                    }
+                        "new-result": {
+                            "result": {
+                                "err": {
+                                    "named": "get-mapped-range-error"
                                 }
                             }
                         }
@@ -1644,15 +1646,13 @@
             },
             {
                 "operation": {
-                    "retype-func-results": {
+                    "retype-func-result": {
                         "resource": "gpu-buffer",
                         "func": "unmap",
-                        "new-results": {
-                            "anon": {
-                                "result": {
-                                    "err": {
-                                        "named": "unmap-error"
-                                    }
+                        "new-result": {
+                            "result": {
+                                "err": {
+                                    "named": "unmap-error"
                                 }
                             }
                         }
@@ -1705,15 +1705,13 @@
             },
             {
                 "operation": {
-                    "retype-func-results": {
+                    "retype-func-result": {
                         "resource": "gpu-compute-pass-encoder",
                         "func": "set-bind-group",
-                        "new-results": {
-                            "anon": {
-                                "result": {
-                                    "err": {
-                                        "named": "set-bind-group-error"
-                                    }
+                        "new-result": {
+                            "result": {
+                                "err": {
+                                    "named": "set-bind-group-error"
                                 }
                             }
                         }
@@ -1722,15 +1720,13 @@
             },
             {
                 "operation": {
-                    "retype-func-results": {
+                    "retype-func-result": {
                         "resource": "gpu-render-pass-encoder",
                         "func": "set-bind-group",
-                        "new-results": {
-                            "anon": {
-                                "result": {
-                                    "err": {
-                                        "named": "set-bind-group-error"
-                                    }
+                        "new-result": {
+                            "result": {
+                                "err": {
+                                    "named": "set-bind-group-error"
                                 }
                             }
                         }
@@ -1739,15 +1735,13 @@
             },
             {
                 "operation": {
-                    "retype-func-results": {
+                    "retype-func-result": {
                         "resource": "gpu-render-bundle-encoder",
                         "func": "set-bind-group",
-                        "new-results": {
-                            "anon": {
-                                "result": {
-                                    "err": {
-                                        "named": "set-bind-group-error"
-                                    }
+                        "new-result": {
+                            "result": {
+                                "err": {
+                                    "named": "set-bind-group-error"
                                 }
                             }
                         }
@@ -1800,15 +1794,13 @@
             },
             {
                 "operation": {
-                    "retype-func-results": {
+                    "retype-func-result": {
                         "resource": "gpu-queue",
                         "func": "write-buffer-with-copy",
-                        "new-results": {
-                            "anon": {
-                                "result": {
-                                    "err": {
-                                        "named": "write-buffer-error"
-                                    }
+                        "new-result": {
+                            "result": {
+                                "err": {
+                                    "named": "write-buffer-error"
                                 }
                             }
                         }
