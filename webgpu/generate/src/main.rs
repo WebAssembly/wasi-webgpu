@@ -45,16 +45,10 @@ fn main() {
     let wit = wit_ast.to_string();
 
     let mut resolve = wit_parser::Resolve::new();
-    // TODO: remove once we have streams
-    resolve.push_file(format!("../deps/io/poll.wit")).unwrap();
 
     resolve.push_str("", &wit).unwrap();
 
     let mut packages = wit_encoder::packages_from_parsed(&resolve);
-
-    // removes wasi:io/pollable
-    // TODO: remove this once we get rid of pollable
-    packages.remove(0);
 
     assert!(packages.len() == 1, "Should create exactly one package");
     let mut package = packages.remove(0);
