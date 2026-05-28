@@ -551,11 +551,11 @@
             },
             {
                 "operation": {
-                    "retype-func-param-type": {
-                        "resource": "gpu-queue",
-                        "func": "write-texture",
-                        "param": "data",
-                        "new-type": {
+                    "replace-type-usages": {
+                        "old": {
+                            "named": "allow-shared-buffer-source"
+                        },
+                        "new": {
                             "list": "u8"
                         }
                     }
