@@ -46,8 +46,8 @@ dependencies = [
  "serde_json",
  "webidl2wit",
  "weedle",
- "wit-encoder",
- "wit-parser",
+ "wit-encoder 0.250.0",
+ "wit-parser 0.250.0",
  "wit-transforms",
 ]
 
@@ -265,6 +265,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "wasmparser"
+version = "0.250.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "071d99cdfb8111603ed05500506c3298a940b58d609dd0259d3981785dd33556"
+dependencies = [
+ "bitflags",
+ "indexmap",
+ "semver",
+]
+
+[[package]]
 name = "webidl2wit"
 version = "0.1.1"
 source = "git+https://github.com/wasi-gfx/webidl2wit?rev=5693d1151834fceddf0e4fd4b9288675a930388e#5693d1151834fceddf0e4fd4b9288675a930388e"
@@ -274,8 +285,8 @@ dependencies = [
  "heck",
  "itertools",
  "weedle",
- "wit-encoder",
- "wit-parser",
+ "wit-encoder 0.248.0",
+ "wit-parser 0.248.0",
 ]
 
 [[package]]
@@ -293,11 +304,21 @@ version = "0.248.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d9eefea6899862e37c81fecef708fd01b6aa8f5da2b21c4715939c765977fca6"
 dependencies = [
+ "pretty_assertions",
+ "semver",
+]
+
+[[package]]
+name = "wit-encoder"
+version = "0.250.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0596bf62f4abd0033fa050c8a414c2f7f2a68e235f1a1e1520b57de3bc92c414"
+dependencies = [
  "id-arena",
  "pretty_assertions",
  "semver",
  "serde",
- "wit-parser",
+ "wit-parser 0.250.0",
 ]
 
 [[package]]
@@ -312,22 +333,38 @@ dependencies = [
  "indexmap",
  "log",
  "semver",
+ "unicode-xid",
+ "wasmparser 0.248.0",
+]
+
+[[package]]
+name = "wit-parser"
+version = "0.250.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a7be74761ad42af22e13d82d89804369aa7298d4d67ae1523aa694f2b30e6b7a"
+dependencies = [
+ "anyhow",
+ "hashbrown 0.17.1",
+ "id-arena",
+ "indexmap",
+ "log",
+ "semver",
  "serde",
  "serde_derive",
  "serde_json",
  "unicode-xid",
- "wasmparser",
+ "wasmparser 0.250.0",
 ]
 
 [[package]]
 name = "wit-transforms"
 version = "0.1.0"
-source = "git+https://github.com/wasi-gfx/wit-transforms?rev=8b790d7453a8da40c72d059bf30de749715c2668#8b790d7453a8da40c72d059bf30de749715c2668"
+source = "git+https://github.com/wasi-gfx/wit-transforms?rev=9761cde246039c39e8e3046f44c07cab917d8f74#9761cde246039c39e8e3046f44c07cab917d8f74"
 dependencies = [
  "anyhow",
  "serde",
  "serde_json",
- "wit-encoder",
+ "wit-encoder 0.250.0",
 ]
 
 [[package]]

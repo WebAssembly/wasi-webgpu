@@ -236,9 +236,13 @@
             },
             {
                 "operation": {
-                    "replace-refs": {
-                        "old": "gpu-buffer-binding-or-gpu-external-texture-or-gpu-sampler-or-gpu-texture-view",
-                        "new": "gpu-buffer-binding-or-gpu-sampler-or-gpu-texture-view"
+                    "replace-type-usages": {
+                        "old": {
+                            "named": "gpu-buffer-binding-or-gpu-external-texture-or-gpu-sampler-or-gpu-texture-view"
+                        },
+                        "new": {
+                            "named": "gpu-buffer-binding-or-gpu-sampler-or-gpu-texture-view"
+                        }
                     }
                 }
             }
@@ -846,9 +850,13 @@
             },
             {
                 "operation": {
-                    "replace-refs": {
-                        "old": "gpu-auto-layout-mode-or-gpu-pipeline-layout",
-                        "new": "gpu-layout-mode"
+                    "replace-type-usages": {
+                        "old": {
+                            "named": "gpu-auto-layout-mode-or-gpu-pipeline-layout"
+                        },
+                        "new": {
+                            "named": "gpu-layout-mode"
+                        }
                     }
                 }
             },
