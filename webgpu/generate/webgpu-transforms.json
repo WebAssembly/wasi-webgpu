@@ -221,7 +221,7 @@
             {
                 "operation": {
                     "remove-variant-case": {
-                        "variant": "gpu-buffer-binding-or-gpu-external-texture-or-gpu-sampler-or-gpu-texture-view",
+                        "variant": "gpu-buffer-or-gpu-buffer-binding-or-gpu-external-texture-or-gpu-sampler-or-gpu-texture-or-gpu-texture-view",
                         "case": "gpu-external-texture"
                     }
                 }
@@ -229,8 +229,8 @@
             {
                 "operation": {
                     "rename-type": {
-                        "from": "gpu-buffer-binding-or-gpu-external-texture-or-gpu-sampler-or-gpu-texture-view",
-                        "to": "gpu-buffer-binding-or-gpu-sampler-or-gpu-texture-view"
+                        "from": "gpu-buffer-or-gpu-buffer-binding-or-gpu-external-texture-or-gpu-sampler-or-gpu-texture-or-gpu-texture-view",
+                        "to": "gpu-buffer-or-gpu-buffer-binding-or-gpu-sampler-or-gpu-texture-or-gpu-texture-view"
                     }
                 }
             },
@@ -238,10 +238,10 @@
                 "operation": {
                     "replace-type-usages": {
                         "old": {
-                            "named": "gpu-buffer-binding-or-gpu-external-texture-or-gpu-sampler-or-gpu-texture-view"
+                            "named": "gpu-buffer-or-gpu-buffer-binding-or-gpu-external-texture-or-gpu-sampler-or-gpu-texture-or-gpu-texture-view"
                         },
                         "new": {
-                            "named": "gpu-buffer-binding-or-gpu-sampler-or-gpu-texture-view"
+                            "named": "gpu-buffer-or-gpu-buffer-binding-or-gpu-sampler-or-gpu-texture-or-gpu-texture-view"
                         }
                     }
                 }
@@ -521,6 +521,90 @@
             {
                 "operation": {
                     "remove-type": "gpu-compute-pass-encoder-set-bind-group-params"
+                }
+            }
+        ]
+    },
+    {
+        "reason": "Beautify gpu-command-encoder.copy-buffer-to-buffer, no tuple params. Using the more powerful variant with offsets and making the offsets optional",
+        "operations": [
+            {
+                "vars": {
+                    "$_SOURCE": {
+                        "find-type": {
+                            "variant-case": {
+                                "variant": "gpu-command-encoder-copy-buffer-to-buffer-params",
+                                "case": "source-source-offset-destination-destination-offset-size"
+                            },
+                            "unwrap-t": [
+                                { "tuple": 0 }
+                            ]
+                        }
+                    },
+                    "$_SOURCE_OFFSET": {
+                        "find-type": {
+                            "variant-case": {
+                                "variant": "gpu-command-encoder-copy-buffer-to-buffer-params",
+                                "case": "source-source-offset-destination-destination-offset-size"
+                            },
+                            "unwrap-t": [
+                                { "tuple": 1 }
+                            ]
+                        }
+                    },
+                    "$_DESTINATION": {
+                        "find-type": {
+                            "variant-case": {
+                                "variant": "gpu-command-encoder-copy-buffer-to-buffer-params",
+                                "case": "source-source-offset-destination-destination-offset-size"
+                            },
+                            "unwrap-t": [
+                                { "tuple": 2 }
+                            ]
+                        }
+                    },
+                    "$_DESTINATION_OFFSET": {
+                        "find-type": {
+                            "variant-case": {
+                                "variant": "gpu-command-encoder-copy-buffer-to-buffer-params",
+                                "case": "source-source-offset-destination-destination-offset-size"
+                            },
+                            "unwrap-t": [
+                                { "tuple": 3 }
+                            ]
+                        }
+                    },
+                    "$_SIZE": {
+                        "find-type": {
+                            "variant-case": {
+                                "variant": "gpu-command-encoder-copy-buffer-to-buffer-params",
+                                "case": "source-source-offset-destination-destination-offset-size"
+                            },
+                            "unwrap-t": [
+                                { "tuple": 4 }
+                            ]
+                        }
+                    }
+                },
+                "operation": {
+                    "retype-func-params": {
+                        "resource": "gpu-command-encoder",
+                        "func": "copy-buffer-to-buffer",
+                        "new-params": {
+                            "items": [
+                                ["source", "$_SOURCE"],
+                                ["source-offset", { "option": "$_SOURCE_OFFSET" }],
+                                ["destination", "$_DESTINATION"],
+                                ["destination-offset", { "option": "$_DESTINATION_OFFSET" }],
+                                ["size", "$_SIZE"]
+                            ]
+                        }
+                    }
+                }
+            },
+            {
+                "operation": {
+                    "remove-type": "gpu-command-encoder-copy-buffer-to-buffer-params"
                 }
             }
         ]
@@ -830,7 +914,7 @@
             {
                 "operation": {
                     "rename-type": {
-                        "from" : "gpu-buffer-binding-or-gpu-sampler-or-gpu-texture-view",
+                        "from" : "gpu-buffer-or-gpu-buffer-binding-or-gpu-sampler-or-gpu-texture-or-gpu-texture-view",
                         "to" : "gpu-binding-resource"
                     }
                 }
@@ -1033,6 +1117,36 @@
             {
                 "operation": {
                     "remove-type": "gpu-render-pass-layout"
+                }
+            }
+        ]
+    },
+    {
+        "reason": "Accepting a texture in place of a texture view is just shorthand for texture.createView() (https://www.w3.org/TR/webgpu/#abstract-opdef-get-as-texture-view), so it's unnecessary — callers can call create-view themselves. JS can hide this behind dynamic typing, but in WIT it would require a variant and complicate the API. webgpu.h also disallows it (https://github.com/gpuweb/gpuweb/pull/5228#issuecomment-3046161091).",
+        "operations": [
+            {
+                "vars": {
+                    "$_VIEW": {
+                        "find-type": {
+                            "variant-case": {
+                                "variant": "gpu-texture-or-gpu-texture-view",
+                                "case": "gpu-texture-view"
+                            }
+                        }
+                    }
+                },
+                "operation": {
+                    "replace-type-usages": {
+                        "old": {
+                            "named": "gpu-texture-or-gpu-texture-view"
+                        },
+                        "new": "$_VIEW"
+                    }
+                }
+            },
+            {
+                "operation": {
+                    "remove-type": "gpu-texture-or-gpu-texture-view"
                 }
             }
         ]
