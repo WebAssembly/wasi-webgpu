@@ -291,9 +291,9 @@ dependencies = [
 
 [[package]]
 name = "weedle"
-version = "0.13.0"
+version = "0.13.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bfde6c0c0dc6d6c8b4f13afc35b46793e5a62890bcafa1a9d4c2c2301fa2f829"
+checksum = "c5352ce9558ad6aa2c4eca1b18329177f5f77ba71f54eac09709ef47701137eb"
 dependencies = [
  "nom",
 ]
@@ -359,7 +359,7 @@ dependencies = [
 [[package]]
 name = "wit-transforms"
 version = "0.1.0"
-source = "git+https://github.com/wasi-gfx/wit-transforms?rev=9761cde246039c39e8e3046f44c07cab917d8f74#9761cde246039c39e8e3046f44c07cab917d8f74"
+source = "git+https://github.com/wasi-gfx/wit-transforms?rev=82bce93fa23d7e2232f85a46898bc62d225e8317#82bce93fa23d7e2232f85a46898bc62d225e8317"
 dependencies = [
  "anyhow",
  "serde",
