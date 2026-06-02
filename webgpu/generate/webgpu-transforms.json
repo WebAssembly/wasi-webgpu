@@ -1152,6 +1152,303 @@
         ]
     },
     {
+        "reason": "Convert WebIDL-style flag namespaces (a resource holding static funcs that return a u32 typedef) into native WIT `flags` types. WebIDL uses this shape because JS has no typed bit-flags primitive; WIT does, so we use it. Also removes the now-unused `gpu-flags-constant` alias.",
+        "operations": [
+            {
+                "operation": {
+                    "rename-type": {
+                        "from": "gpu-buffer-usage",
+                        "to": "gpu-buffer-usage-resource"
+                    }
+                }
+            },
+            {
+                "vars": {
+                    "$_BUFFER_USAGE": {
+                        "find-string-list": {
+                            "resource-func-names": {
+                                "resource": "gpu-buffer-usage-resource"
+                            },
+                            "convert-to": "flags-items",
+                            "transform-strings": "lowercase"
+                        }
+                    }
+                },
+                "operation": {
+                    "add-type": {
+                        "name": "gpu-buffer-usage",
+                        "kind": {
+                            "flags": {
+                                "flags": "$_BUFFER_USAGE"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "operation": {
+                    "remove-type": "gpu-buffer-usage-resource"
+                }
+            },
+            {
+                "operation": {
+                    "replace-type-usages": {
+                        "old": {
+                            "named": "gpu-buffer-usage-flags"
+                        },
+                        "new": {
+                            "named": "gpu-buffer-usage"
+                        }
+                    }
+                }
+            },
+            {
+                "operation": {
+                    "remove-type": "gpu-buffer-usage-flags"
+                }
+            },
+            {
+                "operation": {
+                    "rename-type": {
+                        "from": "gpu-color-write",
+                        "to": "gpu-color-write-resource"
+                    }
+                }
+            },
+            {
+                "vars": {
+                    "$_COLOR_WRITE": {
+                        "find-string-list": {
+                            "resource-func-names": {
+                                "resource": "gpu-color-write-resource"
+                            },
+                            "convert-to": "flags-items",
+                            "transform-strings": "lowercase"
+                        }
+                    }
+                },
+                "operation": {
+                    "add-type": {
+                        "name": "gpu-color-write",
+                        "kind": {
+                            "flags": {
+                                "flags": "$_COLOR_WRITE"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "operation": {
+                    "remove-type": "gpu-color-write-resource"
+                }
+            },
+            {
+                "operation": {
+                    "replace-type-usages": {
+                        "old": {
+                            "named": "gpu-color-write-flags"
+                        },
+                        "new": {
+                            "named": "gpu-color-write"
+                        }
+                    }
+                }
+            },
+            {
+                "operation": {
+                    "remove-type": "gpu-color-write-flags"
+                }
+            },
+            {
+                "operation": {
+                    "rename-type": {
+                        "from": "gpu-map-mode",
+                        "to": "gpu-map-mode-resource"
+                    }
+                }
+            },
+            {
+                "vars": {
+                    "$_MAP_MODE": {
+                        "find-string-list": {
+                            "resource-func-names": {
+                                "resource": "gpu-map-mode-resource"
+                            },
+                            "convert-to": "flags-items",
+                            "transform-strings": "lowercase"
+                        }
+                    }
+                },
+                "operation": {
+                    "add-type": {
+                        "name": "gpu-map-mode",
+                        "kind": {
+                            "flags": {
+                                "flags": "$_MAP_MODE"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "operation": {
+                    "remove-type": "gpu-map-mode-resource"
+                }
+            },
+            {
+                "operation": {
+                    "replace-type-usages": {
+                        "old": {
+                            "named": "gpu-map-mode-flags"
+                        },
+                        "new": {
+                            "named": "gpu-map-mode"
+                        }
+                    }
+                }
+            },
+            {
+                "operation": {
+                    "remove-type": "gpu-map-mode-flags"
+                }
+            },
+            {
+                "operation": {
+                    "rename-type": {
+                        "from": "gpu-shader-stage",
+                        "to": "gpu-shader-stage-resource"
+                    }
+                }
+            },
+            {
+                "vars": {
+                    "$_SHADER_STAGE": {
+                        "find-string-list": {
+                            "resource-func-names": {
+                                "resource": "gpu-shader-stage-resource"
+                            },
+                            "convert-to": "flags-items",
+                            "transform-strings": "lowercase"
+                        }
+                    }
+                },
+                "operation": {
+                    "add-type": {
+                        "name": "gpu-shader-stage",
+                        "kind": {
+                            "flags": {
+                                "flags": "$_SHADER_STAGE"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "operation": {
+                    "remove-type": "gpu-shader-stage-resource"
+                }
+            },
+            {
+                "operation": {
+                    "replace-type-usages": {
+                        "old": {
+                            "named": "gpu-shader-stage-flags"
+                        },
+                        "new": {
+                            "named": "gpu-shader-stage"
+                        }
+                    }
+                }
+            },
+            {
+                "operation": {
+                    "remove-type": "gpu-shader-stage-flags"
+                }
+            },
+            {
+                "operation": {
+                    "rename-type": {
+                        "from": "gpu-texture-usage",
+                        "to": "gpu-texture-usage-resource"
+                    }
+                }
+            },
+            {
+                "vars": {
+                    "$_TEXTURE_USAGE": {
+                        "find-string-list": {
+                            "resource-func-names": {
+                                "resource": "gpu-texture-usage-resource"
+                            },
+                            "convert-to": "flags-items",
+                            "transform-strings": "lowercase"
+                        }
+                    }
+                },
+                "operation": {
+                    "add-type": {
+                        "name": "gpu-texture-usage",
+                        "kind": {
+                            "flags": {
+                                "flags": "$_TEXTURE_USAGE"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "operation": {
+                    "remove-type": "gpu-texture-usage-resource"
+                }
+            },
+            {
+                "operation": {
+                    "replace-type-usages": {
+                        "old": {
+                            "named": "gpu-texture-usage-flags"
+                        },
+                        "new": {
+                            "named": "gpu-texture-usage"
+                        }
+                    }
+                }
+            },
+            {
+                "operation": {
+                    "remove-type": "gpu-texture-usage-flags"
+                }
+            },
+            {
+                "operation": {
+                    "retype-func-result": {
+                        "resource": "gpu-buffer",
+                        "func": "usage",
+                        "new-result": {
+                            "named": "gpu-buffer-usage"
+                        }
+                    }
+                }
+            },
+            {
+                "operation": {
+                    "retype-func-result": {
+                        "resource": "gpu-texture",
+                        "func": "usage",
+                        "new-result": {
+                            "named": "gpu-texture-usage"
+                        }
+                    }
+                }
+            },
+            {
+                "operation": {
+                    "remove-type": "gpu-flags-constant"
+                }
+            }
+        ]
+    },
+    {
         "reason": "Errors have the message field raised to the top level type so that they don't have to be taken out of the inner error. Important if we allow new error types in the future that the developer has not yet handled. They also get a `kind` to enable detecting the error type. `kind` is a variant and not an enum so that they can have fields inside like `pipeline-error.reason`. Note: not changing gpu-error to a record even though errors added by us are records, because GPUError is an interface in the spec, and might one day gain interface like properties",
         "operations": [
             {
