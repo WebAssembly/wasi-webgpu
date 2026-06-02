@@ -73,7 +73,7 @@ interface webgpu {
   }
   record gpu-bind-group-layout-entry {
     binding: gpu-index32,
-    visibility: gpu-shader-stage-flags,
+    visibility: gpu-shader-stage,
     buffer: option<gpu-buffer-binding-layout>,
     sampler: option<gpu-sampler-binding-layout>,
     texture: option<gpu-texture-binding-layout>,
@@ -123,9 +123,9 @@ interface webgpu {
   }
   resource gpu-buffer {
     size: func() -> gpu-size64-out;
-    usage: func() -> gpu-flags-constant;
+    usage: func() -> gpu-buffer-usage;
     map-state: func() -> gpu-buffer-map-state;
-    map-async: func(mode: gpu-map-mode-flags, offset: option<gpu-size64>, size: option<gpu-size64>) -> result<_, map-async-error>;
+    map-async: func(mode: gpu-map-mode, offset: option<gpu-size64>, size: option<gpu-size64>) -> result<_, map-async-error>;
     get-mapped-range-get-with-copy: func(offset: option<gpu-size64>, size: option<gpu-size64>) -> result<list<u8>, get-mapped-range-error>;
     unmap: func() -> result<_, unmap-error>;
     destroy: func();
@@ -150,7 +150,7 @@ interface webgpu {
   }
   record gpu-buffer-descriptor {
     size: gpu-size64,
-    usage: gpu-buffer-usage-flags,
+    usage: gpu-buffer-usage,
     mapped-at-creation: option<bool>,
     label: option<string>,
   }
@@ -160,19 +160,18 @@ interface webgpu {
     pending,
     mapped,
   }
-  resource gpu-buffer-usage {
-    MAP-READ: static func() -> gpu-flags-constant;
-    MAP-WRITE: static func() -> gpu-flags-constant;
-    COPY-SRC: static func() -> gpu-flags-constant;
-    COPY-DST: static func() -> gpu-flags-constant;
-    INDEX: static func() -> gpu-flags-constant;
-    VERTEX: static func() -> gpu-flags-constant;
-    UNIFORM: static func() -> gpu-flags-constant;
-    STORAGE: static func() -> gpu-flags-constant;
-    INDIRECT: static func() -> gpu-flags-constant;
-    QUERY-RESOLVE: static func() -> gpu-flags-constant;
+  flags gpu-buffer-usage {
+    map-read,
+    map-write,
+    copy-src,
+    copy-dst,
+    index,
+    vertex,
+    uniform,
+    storage,
+    indirect,
+    query-resolve,
   }
-  type gpu-buffer-usage-flags = u32;
   enum gpu-canvas-alpha-mode {
     opaque,
     premultiplied,
@@ -180,7 +179,7 @@ interface webgpu {
   record gpu-canvas-configuration {
     device: borrow<gpu-device>,
     format: gpu-texture-format,
-    usage: option<gpu-texture-usage-flags>,
+    usage: option<gpu-texture-usage>,
     view-formats: option<list<gpu-texture-format>>,
     color-space: option<predefined-color-space>,
     tone-mapping: option<gpu-canvas-tone-mapping>,
@@ -189,7 +188,7 @@ interface webgpu {
   record gpu-canvas-configuration-owned {
     device: gpu-device,
     format: gpu-texture-format,
-    usage: option<gpu-texture-usage-flags>,
+    usage: option<gpu-texture-usage>,
     view-formats: option<list<gpu-texture-format>>,
     color-space: option<predefined-color-space>,
     tone-mapping: option<gpu-canvas-tone-mapping>,
@@ -217,16 +216,15 @@ interface webgpu {
   record gpu-color-target-state {
     format: gpu-texture-format,
     blend: option<gpu-blend-state>,
-    write-mask: option<gpu-color-write-flags>,
+    write-mask: option<gpu-color-write>,
   }
-  resource gpu-color-write {
-    RED: static func() -> gpu-flags-constant;
-    GREEN: static func() -> gpu-flags-constant;
-    BLUE: static func() -> gpu-flags-constant;
-    ALPHA: static func() -> gpu-flags-constant;
-    ALL: static func() -> gpu-flags-constant;
+  flags gpu-color-write {
+    red,
+    green,
+    blue,
+    alpha,
+    all,
   }
-  type gpu-color-write-flags = u32;
   resource gpu-command-buffer {
     label: func() -> string;
     set-label: func(label: string);
@@ -418,7 +416,6 @@ interface webgpu {
     nearest,
     linear,
   }
-  type gpu-flags-constant = u32;
   record gpu-fragment-state {
     targets: list<option<gpu-color-target-state>>,
     module: borrow<gpu-shader-module>,
@@ -444,11 +441,10 @@ interface webgpu {
     load,
     clear,
   }
-  resource gpu-map-mode {
-    READ: static func() -> gpu-flags-constant;
-    WRITE: static func() -> gpu-flags-constant;
+  flags gpu-map-mode {
+    read,
+    write,
   }
-  type gpu-map-mode-flags = u32;
   enum gpu-mipmap-filter-mode {
     nearest,
     linear,
@@ -675,12 +671,11 @@ interface webgpu {
     compilation-hints: option<list<gpu-shader-module-compilation-hint>>,
     label: option<string>,
   }
-  resource gpu-shader-stage {
-    VERTEX: static func() -> gpu-flags-constant;
-    FRAGMENT: static func() -> gpu-flags-constant;
-    COMPUTE: static func() -> gpu-flags-constant;
+  flags gpu-shader-stage {
+    vertex,
+    fragment,
+    compute,
   }
-  type gpu-shader-stage-flags = u32;
   type gpu-signed-offset32 = s32;
   type gpu-size32 = u32;
   type gpu-size32-out = u32;
@@ -785,7 +780,7 @@ interface webgpu {
     sample-count: func() -> gpu-size32-out;
     dimension: func() -> gpu-texture-dimension;
     format: func() -> gpu-texture-format;
-    usage: func() -> gpu-flags-constant;
+    usage: func() -> gpu-texture-usage;
     texture-binding-view-dimension: func() -> option<gpu-texture-view-dimension>;
     label: func() -> string;
     set-label: func(label: string);
@@ -807,7 +802,7 @@ interface webgpu {
     sample-count: option<gpu-size32>,
     dimension: option<gpu-texture-dimension>,
     format: gpu-texture-format,
-    usage: gpu-texture-usage-flags,
+    usage: gpu-texture-usage,
     view-formats: option<list<gpu-texture-format>>,
     texture-binding-view-dimension: option<gpu-texture-view-dimension>,
     label: option<string>,
@@ -927,15 +922,14 @@ interface webgpu {
     sint,
     uint,
   }
-  resource gpu-texture-usage {
-    COPY-SRC: static func() -> gpu-flags-constant;
-    COPY-DST: static func() -> gpu-flags-constant;
-    TEXTURE-BINDING: static func() -> gpu-flags-constant;
-    STORAGE-BINDING: static func() -> gpu-flags-constant;
-    RENDER-ATTACHMENT: static func() -> gpu-flags-constant;
-    TRANSIENT-ATTACHMENT: static func() -> gpu-flags-constant;
+  flags gpu-texture-usage {
+    copy-src,
+    copy-dst,
+    texture-binding,
+    storage-binding,
+    render-attachment,
+    transient-attachment,
   }
-  type gpu-texture-usage-flags = u32;
   resource gpu-texture-view {
     label: func() -> string;
     set-label: func(label: string);
@@ -943,7 +937,7 @@ interface webgpu {
   record gpu-texture-view-descriptor {
     format: option<gpu-texture-format>,
     dimension: option<gpu-texture-view-dimension>,
-    usage: option<gpu-texture-usage-flags>,
+    usage: option<gpu-texture-usage>,
     aspect: option<gpu-texture-aspect>,
     base-mip-level: option<gpu-integer-coordinate>,
     mip-level-count: option<gpu-integer-coordinate>,
