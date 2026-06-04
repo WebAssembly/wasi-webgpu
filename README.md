@@ -1,4 +1,4 @@
-# WASI-GFX
+# wasi:webgpu
 
 A proposed [WebAssembly System Interface](https://github.com/WebAssembly/WASI) API.
 
@@ -34,64 +34,28 @@ Linux, Windows, MacOS, Android, Web.
 
 ### Introduction
 
-This proposal is a collection of multiple packages.
-
-| Package                 | Description                                                                        |
-| ------------------------| ---------------------------------------------------------------------------------- |
-| `wasi:webgpu`           | WebGPU package for interacting with GPUs                                           |
-| `wasi:frame-buffer`     | A CPU based graphics API                                                           |
-| `wasi:surface`          | A surface                                                                          |
-| `wasi:graphics-context` | A small interface connecting the graphics APIs (webgpu or frame-buffer) to surface |
+`wasi:webgpu` is a WASI proposal for GPU access in WebAssembly.
 
 
 ### Goals [or Motivating Use Cases, or Scenarios]
 
-- Bring some of the benefits that Wasm provides to CPU code, over to GPU code. 
-- Enable secure GPU compute.
-- Enable wasm-based UI applications.
-- Enable wasm-based graphics even in environments with no GPUs.
-- Enable wasm-based AI for cases not covered by wasi-nn.
+Bring the benefits of Wasm (portability, security, sandboxing) to GPU compute. Use cases include, but are not limited to:
+
+- Server-side graphics streaming.
+- Scientific computing and simulations.
+- AI/ML inference and training.
+- Image and video processing.
+- Data visualization and rendering.
 
 ### Non-goals
 
-- A full windowing API.
-- VR/AR (subject to change, if we find contributors with expertise in the field).
+- Displaying to a screen / windowing API — out of scope here, but active work is happening in other projects that may eventually become their own wasi proposals (e.g., [wasi-gfx](https://github.com/wasi-gfx)).
 
 ### API walk-through
 
 The full API documentation can be found in [imports.md](imports.md).
 
-#### `wasi:webgpu`
-
-`wasi:webgpu` is based on the official [webgpu spec](https://www.w3.org/TR/webgpu/).
-
-`wasi:webgpu` does deviate sometimes from the webgpu spec, namely, in cases where the spec makes assumptions about running in a web or JS environment. Wherever `wasi:webgpu` deviates from the spec, a clear explanation should be documented.
-
-#### `wasi:surface`
-
-`wasi:surface` is a basic surface API. It lets you create a surface you can draw to (similar to canvas on web). You can also get basic user events from the surface, like pointer and keyboard events.
-
-`wasi:surface` supports the following event types:
-- Pointer: For mouse/touch/pencil/etc.
-- Key: For keyboard events.
-- Resize: Surface was resized.
-- Frame: Fires on each frame. (similar to [`requestAnimationFrame`](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) on the web)
-
-Other user input, such as scroll wheel, clipboard, drag-over, device motion, device orientation, gamepad input, etc., are all useful in many applications, but since they're a bit less common, they're out of scope for now. However, they might be added eventually.
-
-#### `wasi:frame-buffer`
-
-A simple frame buffer API for CPU-based rendering.
-
-This might be especially useful in embedded.
-
-#### `wasi:graphics-context`
-
-`wasi:graphics-context` is the point of connection between a graphics API (`wasi:webgpu`, `wasi:frame-buffer`, future graphics API) to a windowing system (`wasi:surface`, future windowing system). See diagram.
-
-![image](https://github.com/user-attachments/assets/55bcc436-7bcd-4f02-9090-888106b889ef)
-
-`wasi:graphics-context` has a method to get the next frame as an `abstract-buffer`. Abstract buffer's contents can't be read. Instead, the graphics API in use can turn the `abstract-buffer` into something it can make use of. E.g. webgpu is able to turn the buffer into a `GPUTexture`. The runtime can easily, in the background, represent the `abstract-buffer` as a `GPUTexture`, and the conversion would just be a no-op.
+`wasi:webgpu` is based on the official [WebGPU spec](https://www.w3.org/TR/webgpu/). It deviate in some cases from the webgpu spec, namely, in cases where the spec makes assumptions about running in a web or JS environment. Wherever `wasi:webgpu` deviates from the spec, a clear explanation should be documented.
 
 #### [Use case 1]
 

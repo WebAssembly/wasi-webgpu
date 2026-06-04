@@ -71,5 +71,5 @@ fn main() {
 
     let output = package.to_string();
 
-    fs::write("../webgpu.wit", output).unwrap();
+    fs::write("../wit/webgpu.wit", output).unwrap();
 }
