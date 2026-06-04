@@ -1,7 +1,6 @@
 package wasi:webgpu@0.0.1;
 
 interface webgpu {
-  use wasi:graphics-context/graphics-context@0.0.1.{ context, abstract-buffer };
   record create-pipeline-error {
     kind: create-pipeline-error-kind,
     message: string,
@@ -353,7 +352,6 @@ interface webgpu {
     push-error-scope: func(filter: gpu-error-filter);
     pop-error-scope: func() -> future<result<option<gpu-error>, pop-error-scope-error>>;
     on-uncaptured-error: func() -> stream<gpu-error>;
-    connect-graphics-context: func(context: borrow<context>);
   }
   record gpu-device-descriptor {
     required-features: option<list<gpu-feature-name>>,
@@ -784,7 +782,6 @@ interface webgpu {
     texture-binding-view-dimension: func() -> option<gpu-texture-view-dimension>;
     label: func() -> string;
     set-label: func(label: string);
-    from-graphics-buffer: static func(buffer: abstract-buffer) -> gpu-texture;
   }
   enum gpu-texture-aspect {
     all,
