@@ -25,7 +25,7 @@ interface webgpu {
     type-error,
   }
   resource gpu {
-    request-adapter: func(options: option<gpu-request-adapter-options>) -> future<option<gpu-adapter>>;
+    request-adapter: async func(options: option<gpu-request-adapter-options>) -> option<gpu-adapter>;
     get-preferred-canvas-format: func() -> gpu-texture-format;
     wgsl-language-features: func() -> wgsl-language-features;
   }
@@ -33,7 +33,7 @@ interface webgpu {
     features: func() -> gpu-supported-features;
     limits: func() -> gpu-supported-limits;
     info: func() -> gpu-adapter-info;
-    request-device: func(descriptor: option<gpu-device-descriptor>) -> future<result<gpu-device, request-device-error>>;
+    request-device: async func(descriptor: option<gpu-device-descriptor>) -> result<gpu-device, request-device-error>;
   }
   resource gpu-adapter-info {
     vendor: func() -> string;
@@ -124,7 +124,7 @@ interface webgpu {
     size: func() -> gpu-size64-out;
     usage: func() -> gpu-buffer-usage;
     map-state: func() -> gpu-buffer-map-state;
-    map-async: func(mode: gpu-map-mode, offset: option<gpu-size64>, size: option<gpu-size64>) -> result<_, map-async-error>;
+    map-async: async func(mode: gpu-map-mode, offset: option<gpu-size64>, size: option<gpu-size64>) -> result<_, map-async-error>;
     get-mapped-range-get-with-copy: func(offset: option<gpu-size64>, size: option<gpu-size64>) -> result<list<u8>, get-mapped-range-error>;
     unmap: func() -> result<_, unmap-error>;
     destroy: func();
@@ -341,8 +341,8 @@ interface webgpu {
     create-shader-module: func(descriptor: gpu-shader-module-descriptor) -> gpu-shader-module;
     create-compute-pipeline: func(descriptor: gpu-compute-pipeline-descriptor) -> gpu-compute-pipeline;
     create-render-pipeline: func(descriptor: gpu-render-pipeline-descriptor) -> gpu-render-pipeline;
-    create-compute-pipeline-async: func(descriptor: gpu-compute-pipeline-descriptor) -> future<result<gpu-compute-pipeline, create-pipeline-error>>;
-    create-render-pipeline-async: func(descriptor: gpu-render-pipeline-descriptor) -> future<result<gpu-render-pipeline, create-pipeline-error>>;
+    create-compute-pipeline-async: async func(descriptor: gpu-compute-pipeline-descriptor) -> result<gpu-compute-pipeline, create-pipeline-error>;
+    create-render-pipeline-async: async func(descriptor: gpu-render-pipeline-descriptor) -> result<gpu-render-pipeline, create-pipeline-error>;
     create-command-encoder: func(descriptor: option<gpu-command-encoder-descriptor>) -> gpu-command-encoder;
     create-render-bundle-encoder: func(descriptor: gpu-render-bundle-encoder-descriptor) -> gpu-render-bundle-encoder;
     create-query-set: func(descriptor: gpu-query-set-descriptor) -> result<gpu-query-set, create-query-set-error>;
@@ -350,7 +350,7 @@ interface webgpu {
     set-label: func(label: string);
     lost: func() -> future<gpu-device-lost-info>;
     push-error-scope: func(filter: gpu-error-filter);
-    pop-error-scope: func() -> future<result<option<gpu-error>, pop-error-scope-error>>;
+    pop-error-scope: async func() -> result<option<gpu-error>, pop-error-scope-error>;
     on-uncaptured-error: func() -> stream<gpu-error>;
   }
   record gpu-device-descriptor {
@@ -512,7 +512,7 @@ interface webgpu {
   }
   resource gpu-queue {
     submit: func(command-buffers: list<borrow<gpu-command-buffer>>);
-    on-submitted-work-done: func() -> future;
+    on-submitted-work-done: async func();
     write-buffer-with-copy: func(buffer: borrow<gpu-buffer>, buffer-offset: gpu-size64, data: list<u8>, data-offset: option<gpu-size64>, size: option<gpu-size64>) -> result<_, write-buffer-error>;
     write-texture-with-copy: func(destination: gpu-texel-copy-texture-info, data: list<u8>, data-layout: gpu-texel-copy-buffer-layout, size: gpu-extent3-d);
     label: func() -> string;
@@ -656,7 +656,7 @@ interface webgpu {
     label: option<string>,
   }
   resource gpu-shader-module {
-    get-compilation-info: func() -> future<gpu-compilation-info>;
+    get-compilation-info: async func() -> gpu-compilation-info;
     label: func() -> string;
     set-label: func(label: string);
   }

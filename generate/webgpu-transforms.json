@@ -1523,10 +1523,7 @@
                             "func-result": {
                                 "resource": "gpu-adapter",
                                 "func": "request-device"
-                            },
-                            "unwrap-t": [
-                                "future"
-                            ]
+                            }
                         }
                     }
                 },
@@ -1535,12 +1532,10 @@
                         "resource": "gpu-adapter",
                         "func": "request-device",
                         "new-result": {
-                            "future": {
-                                "result": {
-                                    "ok": "$_SUCCESS",
-                                    "err": {
-                                        "named": "request-device-error"
-                                    }
+                            "result": {
+                                "ok": "$_SUCCESS",
+                                "err": {
+                                    "named": "request-device-error"
                                 }
                             }
                         }
@@ -1601,10 +1596,7 @@
                             "func-result": {
                                 "resource": "gpu-device",
                                 "func": "create-compute-pipeline-async"
-                            },
-                            "unwrap-t": [
-                                "future"
-                            ]
+                            }
                         }
                     }
                 },
@@ -1613,12 +1605,10 @@
                         "resource": "gpu-device",
                         "func": "create-compute-pipeline-async",
                         "new-result": {
-                            "future": {
-                                "result": {
-                                    "ok": "$_SUCCESS",
-                                    "err": {
-                                        "named": "create-pipeline-error"
-                                    }
+                            "result": {
+                                "ok": "$_SUCCESS",
+                                "err": {
+                                    "named": "create-pipeline-error"
                                 }
                             }
                         }
@@ -1632,10 +1622,7 @@
                             "func-result": {
                                 "resource": "gpu-device",
                                 "func": "create-render-pipeline-async"
-                            },
-                            "unwrap-t": [
-                                "future"
-                            ]
+                            }
                         }
                     }
                 },
@@ -1644,12 +1631,10 @@
                         "resource": "gpu-device",
                         "func": "create-render-pipeline-async",
                         "new-result": {
-                            "future": {
-                                "result": {
-                                    "ok": "$_SUCCESS",
-                                    "err": {
-                                        "named": "create-pipeline-error"
-                                    }
+                            "result": {
+                                "ok": "$_SUCCESS",
+                                "err": {
+                                    "named": "create-pipeline-error"
                                 }
                             }
                         }
@@ -1787,10 +1772,7 @@
                             "func-result": {
                                 "resource": "gpu-device",
                                 "func": "pop-error-scope"
-                            },
-                            "unwrap-t": [
-                                "future"
-                            ]
+                            }
                         }
                     }
                 },
@@ -1799,12 +1781,10 @@
                         "resource": "gpu-device",
                         "func": "pop-error-scope",
                         "new-result": {
-                            "future": {
-                                "result": {
-                                    "ok": "$_SUCCESS",
-                                    "err": {
-                                        "named": "pop-error-scope-error"
-                                    }
+                            "result": {
+                                "ok": "$_SUCCESS",
+                                "err": {
+                                    "named": "pop-error-scope-error"
                                 }
                             }
                         }
@@ -1997,7 +1977,7 @@
         ]
     },
     {
-        "reason": "unmap throws if called while future returned by map-async is still pending. https://www.w3.org/TR/webgpu/#dom-gpubuffer-unmap",
+        "reason": "unmap throws if called while map-async is still pending. https://www.w3.org/TR/webgpu/#dom-gpubuffer-unmap",
         "operations": [
             {
                 "operation": {
