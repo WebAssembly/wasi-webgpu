@@ -278,7 +278,7 @@ dependencies = [
 [[package]]
 name = "webidl2wit"
 version = "0.1.1"
-source = "git+https://github.com/wasi-gfx/webidl2wit?rev=5693d1151834fceddf0e4fd4b9288675a930388e#5693d1151834fceddf0e4fd4b9288675a930388e"
+source = "git+https://github.com/wasi-gfx/webidl2wit?rev=f342f815af71e8c2c9d7eb57cee4c6d91e1cfdd5#f342f815af71e8c2c9d7eb57cee4c6d91e1cfdd5"
 dependencies = [
  "anyhow",
  "hashlink",

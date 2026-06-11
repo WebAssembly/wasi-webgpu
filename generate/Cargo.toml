@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-webidl2wit = { git = "https://github.com/wasi-gfx/webidl2wit", rev = "5693d1151834fceddf0e4fd4b9288675a930388e" }
+webidl2wit = { git = "https://github.com/wasi-gfx/webidl2wit", rev = "f342f815af71e8c2c9d7eb57cee4c6d91e1cfdd5" }
 weedle = "0.13.1"
 wit-transforms = { git = "https://github.com/wasi-gfx/wit-transforms", rev = "82bce93fa23d7e2232f85a46898bc62d225e8317" }
 wit-parser = "0.250"
