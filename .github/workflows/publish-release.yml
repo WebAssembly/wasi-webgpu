@@ -58,7 +58,11 @@ jobs:
         uses: cargo-bins/cargo-binstall@80aaafe04903087c333980fa2686259ddd34b2d9 # v1.16.6
 
       - name: Install wkg
-        run: cargo binstall -y "wkg@0.13.0"
+        # Pin the exact version. The version that builds the component (wkg wit
+        # build) and the version that pushes/decodes it (the publish step) must
+        # match, or async export names like `[async method]gpu.request-adapter`
+        # encoded by one are rejected by the other.
+        run: cargo binstall -y wkg@0.15.1
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
@@ -72,8 +76,12 @@ jobs:
 
       - name: Publish to GitHub Container Registry
         id: publish
-        uses: bytecodealliance/wkg-github-action@10b3b04b9059ba46208cd7daf7d352af14bded0f # v5
+        # Pinned to a main commit (not v5) because the `wkg` version input is
+        # only honored on main; v5 always installs the latest wkg, which can
+        # differ from the build version and fail to decode async export names.
+        uses: bytecodealliance/wkg-github-action@5b7005d1fc81c8c3380a059e58345033e3a97638 # main
         with:
+          wkg: "0.15.1"
           oci-reference-without-tag: ghcr.io/webassembly/wasi/webgpu
           file: wasi-webgpu.wasm
           description: 'WASI WebGPU API'
