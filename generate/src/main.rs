@@ -26,17 +26,7 @@ fn main() {
                 "OffscreenCanvas".into(),
             ],
             resource_inheritance: ResourceInheritance::DuplicateMethods,
-            package_name: webidl2wit::PackageName::new(
-                "wasi",
-                "webgpu",
-                Some(semver::Version {
-                    major: 0,
-                    minor: 0,
-                    patch: 1,
-                    pre: Default::default(),
-                    build: Default::default(),
-                }),
-            ),
+            package_name: webidl2wit::PackageName::new("wasi", "webgpu", Some(package_version())),
             interface_name: "webgpu".into(),
             ..Default::default()
         },
@@ -72,4 +62,16 @@ fn main() {
     let output = package.to_string();
 
     fs::write("../wit/webgpu.wit", output).unwrap();
+}
+
+fn package_version() -> semver::Version {
+    let version = fs::read_to_string("../wit/imports.wit")
+        .ok()
+        .and_then(|wit| {
+            wit.lines()
+                .find_map(|line| line.trim().strip_prefix("package wasi:webgpu@"))
+                .map(|rest| rest.trim_end_matches(';').trim().to_string())
+        })
+        .unwrap();
+    semver::Version::parse(&version).unwrap()
 }
