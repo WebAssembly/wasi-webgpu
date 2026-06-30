@@ -2,11 +2,11 @@
 <ul>
 <li>Imports:
 <ul>
-<li>interface <a href="#wasi_webgpu_webgpu_0_0_1"><code>wasi:webgpu/webgpu@0.0.1</code></a></li>
+<li>interface <a href="#wasi_webgpu_webgpu_0_2_0_rc_2"><code>wasi:webgpu/webgpu@0.2.0-rc.2</code></a></li>
 </ul>
 </li>
 </ul>
-<h2><a id="wasi_webgpu_webgpu_0_0_1"></a>Import interface wasi:webgpu/webgpu@0.0.1</h2>
+<h2><a id="wasi_webgpu_webgpu_0_2_0_rc_2"></a>Import interface wasi:webgpu/webgpu@0.2.0-rc.2</h2>
 <hr />
 <h3>Types</h3>
 <h4><a id="create_query_set_error_kind"></a><code>variant create-query-set-error-kind</code></h4>
@@ -106,11 +106,21 @@
 <li><a id="gpu_buffer_map_state.pending"></a><code>pending</code></li>
 <li><a id="gpu_buffer_map_state.mapped"></a><code>mapped</code></li>
 </ul>
-<h4><a id="gpu_buffer_usage"></a><code>resource gpu-buffer-usage</code></h4>
-<h4><a id="gpu_buffer_usage_flags"></a><code>type gpu-buffer-usage-flags</code></h4>
-<p><code>u32</code></p>
-<p>
-#### <a id="gpu_canvas_alpha_mode"></a>`enum gpu-canvas-alpha-mode`
+<h4><a id="gpu_buffer_usage"></a><code>flags gpu-buffer-usage</code></h4>
+<h5>Flags members</h5>
+<ul>
+<li><a id="gpu_buffer_usage.map_read"></a><code>map-read</code>: </li>
+<li><a id="gpu_buffer_usage.map_write"></a><code>map-write</code>: </li>
+<li><a id="gpu_buffer_usage.copy_src"></a><code>copy-src</code>: </li>
+<li><a id="gpu_buffer_usage.copy_dst"></a><code>copy-dst</code>: </li>
+<li><a id="gpu_buffer_usage.index"></a><code>index</code>: </li>
+<li><a id="gpu_buffer_usage.vertex"></a><code>vertex</code>: </li>
+<li><a id="gpu_buffer_usage.uniform"></a><code>uniform</code>: </li>
+<li><a id="gpu_buffer_usage.storage"></a><code>storage</code>: </li>
+<li><a id="gpu_buffer_usage.indirect"></a><code>indirect</code>: </li>
+<li><a id="gpu_buffer_usage.query_resolve"></a><code>query-resolve</code>: </li>
+</ul>
+<h4><a id="gpu_canvas_alpha_mode"></a><code>enum gpu-canvas-alpha-mode</code></h4>
 <h5>Enum Cases</h5>
 <ul>
 <li><a id="gpu_canvas_alpha_mode.opaque"></a><code>opaque</code></li>
@@ -136,11 +146,16 @@
 <li><a id="gpu_color.b"></a><code>b</code>: <code>f64</code></li>
 <li><a id="gpu_color.a"></a><code>a</code>: <code>f64</code></li>
 </ul>
-<h4><a id="gpu_color_write"></a><code>resource gpu-color-write</code></h4>
-<h4><a id="gpu_color_write_flags"></a><code>type gpu-color-write-flags</code></h4>
-<p><code>u32</code></p>
-<p>
-#### <a id="gpu_command_buffer"></a>`resource gpu-command-buffer`
+<h4><a id="gpu_color_write"></a><code>flags gpu-color-write</code></h4>
+<h5>Flags members</h5>
+<ul>
+<li><a id="gpu_color_write.red"></a><code>red</code>: </li>
+<li><a id="gpu_color_write.green"></a><code>green</code>: </li>
+<li><a id="gpu_color_write.blue"></a><code>blue</code>: </li>
+<li><a id="gpu_color_write.alpha"></a><code>alpha</code>: </li>
+<li><a id="gpu_color_write.all"></a><code>all</code>: </li>
+</ul>
+<h4><a id="gpu_command_buffer"></a><code>resource gpu-command-buffer</code></h4>
 <h4><a id="gpu_command_buffer_descriptor"></a><code>record gpu-command-buffer-descriptor</code></h4>
 <h5>Record Fields</h5>
 <ul>
@@ -240,10 +255,7 @@
 <li><a id="gpu_filter_mode.nearest"></a><code>nearest</code></li>
 <li><a id="gpu_filter_mode.linear"></a><code>linear</code></li>
 </ul>
-<h4><a id="gpu_flags_constant"></a><code>type gpu-flags-constant</code></h4>
-<p><code>u32</code></p>
-<p>
-#### <a id="gpu_front_face"></a>`enum gpu-front-face`
+<h4><a id="gpu_front_face"></a><code>enum gpu-front-face</code></h4>
 <h5>Enum Cases</h5>
 <ul>
 <li><a id="gpu_front_face.ccw"></a><code>ccw</code></li>
@@ -277,11 +289,13 @@
 <li><a id="gpu_load_op.load"></a><code>load</code></li>
 <li><a id="gpu_load_op.clear"></a><code>clear</code></li>
 </ul>
-<h4><a id="gpu_map_mode"></a><code>resource gpu-map-mode</code></h4>
-<h4><a id="gpu_map_mode_flags"></a><code>type gpu-map-mode-flags</code></h4>
-<p><code>u32</code></p>
-<p>
-#### <a id="gpu_mipmap_filter_mode"></a>`enum gpu-mipmap-filter-mode`
+<h4><a id="gpu_map_mode"></a><code>flags gpu-map-mode</code></h4>
+<h5>Flags members</h5>
+<ul>
+<li><a id="gpu_map_mode.read"></a><code>read</code>: </li>
+<li><a id="gpu_map_mode.write"></a><code>write</code>: </li>
+</ul>
+<h4><a id="gpu_mipmap_filter_mode"></a><code>enum gpu-mipmap-filter-mode</code></h4>
 <h5>Enum Cases</h5>
 <ul>
 <li><a id="gpu_mipmap_filter_mode.nearest"></a><code>nearest</code></li>
@@ -420,12 +434,15 @@
 <li><a id="gpu_shader_module_descriptor.compilation_hints"></a><code>compilation-hints</code>: option&lt;list&lt;<a href="#gpu_shader_module_compilation_hint"><a href="#gpu_shader_module_compilation_hint"><code>gpu-shader-module-compilation-hint</code></a></a>&gt;&gt;</li>
 <li><a id="gpu_shader_module_descriptor.label"></a><code>label</code>: option&lt;<code>string</code>&gt;</li>
 </ul>
-<h4><a id="gpu_shader_stage"></a><code>resource gpu-shader-stage</code></h4>
-<h4><a id="gpu_shader_stage_flags"></a><code>type gpu-shader-stage-flags</code></h4>
-<p><code>u32</code></p>
-<p>
-#### <a id="gpu_signed_offset32"></a>`type gpu-signed-offset32`
-`s32`
+<h4><a id="gpu_shader_stage"></a><code>flags gpu-shader-stage</code></h4>
+<h5>Flags members</h5>
+<ul>
+<li><a id="gpu_shader_stage.vertex"></a><code>vertex</code>: </li>
+<li><a id="gpu_shader_stage.fragment"></a><code>fragment</code>: </li>
+<li><a id="gpu_shader_stage.compute"></a><code>compute</code>: </li>
+</ul>
+<h4><a id="gpu_signed_offset32"></a><code>type gpu-signed-offset32</code></h4>
+<p><code>s32</code></p>
 <p>
 #### <a id="gpu_size32"></a>`type gpu-size32`
 `u32`
@@ -495,7 +512,7 @@
 <h5>Record Fields</h5>
 <ul>
 <li><a id="gpu_buffer_descriptor.size"></a><code>size</code>: <a href="#gpu_size64"><a href="#gpu_size64"><code>gpu-size64</code></a></a></li>
-<li><a id="gpu_buffer_descriptor.usage"></a><code>usage</code>: <a href="#gpu_buffer_usage_flags"><a href="#gpu_buffer_usage_flags"><code>gpu-buffer-usage-flags</code></a></a></li>
+<li><a id="gpu_buffer_descriptor.usage"></a><code>usage</code>: <a href="#gpu_buffer_usage"><a href="#gpu_buffer_usage"><code>gpu-buffer-usage</code></a></a></li>
 <li><a id="gpu_buffer_descriptor.mapped_at_creation"></a><code>mapped-at-creation</code>: option&lt;<code>bool</code>&gt;</li>
 <li><a id="gpu_buffer_descriptor.label"></a><code>label</code>: option&lt;<code>string</code>&gt;</li>
 </ul>
@@ -688,7 +705,7 @@
 <ul>
 <li><a id="gpu_color_target_state.format"></a><code>format</code>: <a href="#gpu_texture_format"><a href="#gpu_texture_format"><code>gpu-texture-format</code></a></a></li>
 <li><a id="gpu_color_target_state.blend"></a><code>blend</code>: option&lt;<a href="#gpu_blend_state"><a href="#gpu_blend_state"><code>gpu-blend-state</code></a></a>&gt;</li>
-<li><a id="gpu_color_target_state.write_mask"></a><code>write-mask</code>: option&lt;<a href="#gpu_color_write_flags"><a href="#gpu_color_write_flags"><code>gpu-color-write-flags</code></a></a>&gt;</li>
+<li><a id="gpu_color_target_state.write_mask"></a><code>write-mask</code>: option&lt;<a href="#gpu_color_write"><a href="#gpu_color_write"><code>gpu-color-write</code></a></a>&gt;</li>
 </ul>
 <h4><a id="gpu_depth_stencil_state"></a><code>record gpu-depth-stencil-state</code></h4>
 <h5>Record Fields</h5>
@@ -723,11 +740,17 @@
 <li><a id="gpu_texture_sample_type.sint"></a><code>sint</code></li>
 <li><a id="gpu_texture_sample_type.uint"></a><code>uint</code></li>
 </ul>
-<h4><a id="gpu_texture_usage"></a><code>resource gpu-texture-usage</code></h4>
-<h4><a id="gpu_texture_usage_flags"></a><code>type gpu-texture-usage-flags</code></h4>
-<p><code>u32</code></p>
-<p>
-#### <a id="gpu_texture_view"></a>`resource gpu-texture-view`
+<h4><a id="gpu_texture_usage"></a><code>flags gpu-texture-usage</code></h4>
+<h5>Flags members</h5>
+<ul>
+<li><a id="gpu_texture_usage.copy_src"></a><code>copy-src</code>: </li>
+<li><a id="gpu_texture_usage.copy_dst"></a><code>copy-dst</code>: </li>
+<li><a id="gpu_texture_usage.texture_binding"></a><code>texture-binding</code>: </li>
+<li><a id="gpu_texture_usage.storage_binding"></a><code>storage-binding</code>: </li>
+<li><a id="gpu_texture_usage.render_attachment"></a><code>render-attachment</code>: </li>
+<li><a id="gpu_texture_usage.transient_attachment"></a><code>transient-attachment</code>: </li>
+</ul>
+<h4><a id="gpu_texture_view"></a><code>resource gpu-texture-view</code></h4>
 <h4><a id="gpu_binding_resource"></a><code>variant gpu-binding-resource</code></h4>
 <h5>Variant Cases</h5>
 <ul>
@@ -811,7 +834,7 @@
 <h5>Record Fields</h5>
 <ul>
 <li><a id="gpu_bind_group_layout_entry.binding"></a><code>binding</code>: <a href="#gpu_index32"><a href="#gpu_index32"><code>gpu-index32</code></a></a></li>
-<li><a id="gpu_bind_group_layout_entry.visibility"></a><code>visibility</code>: <a href="#gpu_shader_stage_flags"><a href="#gpu_shader_stage_flags"><code>gpu-shader-stage-flags</code></a></a></li>
+<li><a id="gpu_bind_group_layout_entry.visibility"></a><code>visibility</code>: <a href="#gpu_shader_stage"><a href="#gpu_shader_stage"><code>gpu-shader-stage</code></a></a></li>
 <li><a id="gpu_bind_group_layout_entry.buffer"></a><code>buffer</code>: option&lt;<a href="#gpu_buffer_binding_layout"><a href="#gpu_buffer_binding_layout"><code>gpu-buffer-binding-layout</code></a></a>&gt;</li>
 <li><a id="gpu_bind_group_layout_entry.sampler"></a><code>sampler</code>: option&lt;<a href="#gpu_sampler_binding_layout"><a href="#gpu_sampler_binding_layout"><code>gpu-sampler-binding-layout</code></a></a>&gt;</li>
 <li><a id="gpu_bind_group_layout_entry.texture"></a><code>texture</code>: option&lt;<a href="#gpu_texture_binding_layout"><a href="#gpu_texture_binding_layout"><code>gpu-texture-binding-layout</code></a></a>&gt;</li>
@@ -831,7 +854,7 @@
 <li><a id="gpu_texture_descriptor.sample_count"></a><code>sample-count</code>: option&lt;<a href="#gpu_size32"><a href="#gpu_size32"><code>gpu-size32</code></a></a>&gt;</li>
 <li><a id="gpu_texture_descriptor.dimension"></a><code>dimension</code>: option&lt;<a href="#gpu_texture_dimension"><a href="#gpu_texture_dimension"><code>gpu-texture-dimension</code></a></a>&gt;</li>
 <li><a id="gpu_texture_descriptor.format"></a><code>format</code>: <a href="#gpu_texture_format"><a href="#gpu_texture_format"><code>gpu-texture-format</code></a></a></li>
-<li><a id="gpu_texture_descriptor.usage"></a><code>usage</code>: <a href="#gpu_texture_usage_flags"><a href="#gpu_texture_usage_flags"><code>gpu-texture-usage-flags</code></a></a></li>
+<li><a id="gpu_texture_descriptor.usage"></a><code>usage</code>: <a href="#gpu_texture_usage"><a href="#gpu_texture_usage"><code>gpu-texture-usage</code></a></a></li>
 <li><a id="gpu_texture_descriptor.view_formats"></a><code>view-formats</code>: option&lt;list&lt;<a href="#gpu_texture_format"><a href="#gpu_texture_format"><code>gpu-texture-format</code></a></a>&gt;&gt;</li>
 <li><a id="gpu_texture_descriptor.texture_binding_view_dimension"></a><code>texture-binding-view-dimension</code>: option&lt;<a href="#gpu_texture_view_dimension"><a href="#gpu_texture_view_dimension"><code>gpu-texture-view-dimension</code></a></a>&gt;</li>
 <li><a id="gpu_texture_descriptor.label"></a><code>label</code>: option&lt;<code>string</code>&gt;</li>
@@ -841,7 +864,7 @@
 <ul>
 <li><a id="gpu_texture_view_descriptor.format"></a><code>format</code>: option&lt;<a href="#gpu_texture_format"><a href="#gpu_texture_format"><code>gpu-texture-format</code></a></a>&gt;</li>
 <li><a id="gpu_texture_view_descriptor.dimension"></a><code>dimension</code>: option&lt;<a href="#gpu_texture_view_dimension"><a href="#gpu_texture_view_dimension"><code>gpu-texture-view-dimension</code></a></a>&gt;</li>
-<li><a id="gpu_texture_view_descriptor.usage"></a><code>usage</code>: option&lt;<a href="#gpu_texture_usage_flags"><a href="#gpu_texture_usage_flags"><code>gpu-texture-usage-flags</code></a></a>&gt;</li>
+<li><a id="gpu_texture_view_descriptor.usage"></a><code>usage</code>: option&lt;<a href="#gpu_texture_usage"><a href="#gpu_texture_usage"><code>gpu-texture-usage</code></a></a>&gt;</li>
 <li><a id="gpu_texture_view_descriptor.aspect"></a><code>aspect</code>: option&lt;<a href="#gpu_texture_aspect"><a href="#gpu_texture_aspect"><code>gpu-texture-aspect</code></a></a>&gt;</li>
 <li><a id="gpu_texture_view_descriptor.base_mip_level"></a><code>base-mip-level</code>: option&lt;<a href="#gpu_integer_coordinate"><a href="#gpu_integer_coordinate"><code>gpu-integer-coordinate</code></a></a>&gt;</li>
 <li><a id="gpu_texture_view_descriptor.mip_level_count"></a><code>mip-level-count</code>: option&lt;<a href="#gpu_integer_coordinate"><a href="#gpu_integer_coordinate"><code>gpu-integer-coordinate</code></a></a>&gt;</li>
@@ -951,7 +974,7 @@
 <ul>
 <li><a id="gpu_canvas_configuration.device"></a><code>device</code>: borrow&lt;<a href="#gpu_device"><a href="#gpu_device"><code>gpu-device</code></a></a>&gt;</li>
 <li><a id="gpu_canvas_configuration.format"></a><code>format</code>: <a href="#gpu_texture_format"><a href="#gpu_texture_format"><code>gpu-texture-format</code></a></a></li>
-<li><a id="gpu_canvas_configuration.usage"></a><code>usage</code>: option&lt;<a href="#gpu_texture_usage_flags"><a href="#gpu_texture_usage_flags"><code>gpu-texture-usage-flags</code></a></a>&gt;</li>
+<li><a id="gpu_canvas_configuration.usage"></a><code>usage</code>: option&lt;<a href="#gpu_texture_usage"><a href="#gpu_texture_usage"><code>gpu-texture-usage</code></a></a>&gt;</li>
 <li><a id="gpu_canvas_configuration.view_formats"></a><code>view-formats</code>: option&lt;list&lt;<a href="#gpu_texture_format"><a href="#gpu_texture_format"><code>gpu-texture-format</code></a></a>&gt;&gt;</li>
 <li><a id="gpu_canvas_configuration.color_space"></a><code>color-space</code>: option&lt;<a href="#predefined_color_space"><a href="#predefined_color_space"><code>predefined-color-space</code></a></a>&gt;</li>
 <li><a id="gpu_canvas_configuration.tone_mapping"></a><code>tone-mapping</code>: option&lt;<a href="#gpu_canvas_tone_mapping"><a href="#gpu_canvas_tone_mapping"><code>gpu-canvas-tone-mapping</code></a></a>&gt;</li>
@@ -962,7 +985,7 @@
 <ul>
 <li><a id="gpu_canvas_configuration_owned.device"></a><code>device</code>: own&lt;<a href="#gpu_device"><a href="#gpu_device"><code>gpu-device</code></a></a>&gt;</li>
 <li><a id="gpu_canvas_configuration_owned.format"></a><code>format</code>: <a href="#gpu_texture_format"><a href="#gpu_texture_format"><code>gpu-texture-format</code></a></a></li>
-<li><a id="gpu_canvas_configuration_owned.usage"></a><code>usage</code>: option&lt;<a href="#gpu_texture_usage_flags"><a href="#gpu_texture_usage_flags"><code>gpu-texture-usage-flags</code></a></a>&gt;</li>
+<li><a id="gpu_canvas_configuration_owned.usage"></a><code>usage</code>: option&lt;<a href="#gpu_texture_usage"><a href="#gpu_texture_usage"><code>gpu-texture-usage</code></a></a>&gt;</li>
 <li><a id="gpu_canvas_configuration_owned.view_formats"></a><code>view-formats</code>: option&lt;list&lt;<a href="#gpu_texture_format"><a href="#gpu_texture_format"><code>gpu-texture-format</code></a></a>&gt;&gt;</li>
 <li><a id="gpu_canvas_configuration_owned.color_space"></a><code>color-space</code>: option&lt;<a href="#predefined_color_space"><a href="#predefined_color_space"><code>predefined-color-space</code></a></a>&gt;</li>
 <li><a id="gpu_canvas_configuration_owned.tone_mapping"></a><code>tone-mapping</code>: option&lt;<a href="#gpu_canvas_tone_mapping"><a href="#gpu_canvas_tone_mapping"><code>gpu-canvas-tone-mapping</code></a></a>&gt;</li>
@@ -1067,15 +1090,15 @@
 </ul>
 <hr />
 <h3>Functions</h3>
-<h4><a id="method_gpu_request_adapter"></a><code>[method]gpu.request-adapter: func</code></h4>
+<h4><a id="async_method_gpu_request_adapter"></a><code>[async method]gpu.request-adapter: func</code></h4>
 <h5>Params</h5>
 <ul>
-<li><a id="method_gpu_request_adapter.self"></a><code>self</code>: borrow&lt;<a href="#gpu"><a href="#gpu"><code>gpu</code></a></a>&gt;</li>
-<li><a id="method_gpu_request_adapter.options"></a><code>options</code>: option&lt;<a href="#gpu_request_adapter_options"><a href="#gpu_request_adapter_options"><code>gpu-request-adapter-options</code></a></a>&gt;</li>
+<li><a id="async_method_gpu_request_adapter.self"></a><code>self</code>: borrow&lt;<a href="#gpu"><a href="#gpu"><code>gpu</code></a></a>&gt;</li>
+<li><a id="async_method_gpu_request_adapter.options"></a><code>options</code>: option&lt;<a href="#gpu_request_adapter_options"><a href="#gpu_request_adapter_options"><code>gpu-request-adapter-options</code></a></a>&gt;</li>
 </ul>
 <h5>Return values</h5>
 <ul>
-<li><a id="method_gpu_request_adapter.0"></a> future&lt;option&lt;own&lt;<a href="#gpu_adapter"><a href="#gpu_adapter"><code>gpu-adapter</code></a></a>&gt;&gt;&gt;</li>
+<li><a id="async_method_gpu_request_adapter.0"></a> option&lt;own&lt;<a href="#gpu_adapter"><a href="#gpu_adapter"><code>gpu-adapter</code></a></a>&gt;&gt;</li>
 </ul>
 <h4><a id="method_gpu_get_preferred_canvas_format"></a><code>[method]gpu.get-preferred-canvas-format: func</code></h4>
 <h5>Params</h5>
@@ -1122,15 +1145,15 @@
 <ul>
 <li><a id="method_gpu_adapter_info.0"></a> own&lt;<a href="#gpu_adapter_info"><a href="#gpu_adapter_info"><code>gpu-adapter-info</code></a></a>&gt;</li>
 </ul>
-<h4><a id="method_gpu_adapter_request_device"></a><code>[method]gpu-adapter.request-device: func</code></h4>
+<h4><a id="async_method_gpu_adapter_request_device"></a><code>[async method]gpu-adapter.request-device: func</code></h4>
 <h5>Params</h5>
 <ul>
-<li><a id="method_gpu_adapter_request_device.self"></a><code>self</code>: borrow&lt;<a href="#gpu_adapter"><a href="#gpu_adapter"><code>gpu-adapter</code></a></a>&gt;</li>
-<li><a id="method_gpu_adapter_request_device.descriptor"></a><code>descriptor</code>: option&lt;<a href="#gpu_device_descriptor"><a href="#gpu_device_descriptor"><code>gpu-device-descriptor</code></a></a>&gt;</li>
+<li><a id="async_method_gpu_adapter_request_device.self"></a><code>self</code>: borrow&lt;<a href="#gpu_adapter"><a href="#gpu_adapter"><code>gpu-adapter</code></a></a>&gt;</li>
+<li><a id="async_method_gpu_adapter_request_device.descriptor"></a><code>descriptor</code>: option&lt;<a href="#gpu_device_descriptor"><a href="#gpu_device_descriptor"><code>gpu-device-descriptor</code></a></a>&gt;</li>
 </ul>
 <h5>Return values</h5>
 <ul>
-<li><a id="method_gpu_adapter_request_device.0"></a> future&lt;result&lt;own&lt;<a href="#gpu_device"><a href="#gpu_device"><code>gpu-device</code></a></a>&gt;, <a href="#request_device_error"><a href="#request_device_error"><code>request-device-error</code></a></a>&gt;&gt;</li>
+<li><a id="async_method_gpu_adapter_request_device.0"></a> result&lt;own&lt;<a href="#gpu_device"><a href="#gpu_device"><code>gpu-device</code></a></a>&gt;, <a href="#request_device_error"><a href="#request_device_error"><code>request-device-error</code></a></a>&gt;</li>
 </ul>
 <h4><a id="method_gpu_adapter_info_vendor"></a><code>[method]gpu-adapter-info.vendor: func</code></h4>
 <h5>Params</h5>
@@ -1241,7 +1264,7 @@
 </ul>
 <h5>Return values</h5>
 <ul>
-<li><a id="method_gpu_buffer_usage.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
+<li><a id="method_gpu_buffer_usage.0"></a> <a href="#gpu_buffer_usage"><a href="#gpu_buffer_usage"><code>gpu-buffer-usage</code></a></a></li>
 </ul>
 <h4><a id="method_gpu_buffer_map_state"></a><code>[method]gpu-buffer.map-state: func</code></h4>
 <h5>Params</h5>
@@ -1252,17 +1275,17 @@
 <ul>
 <li><a id="method_gpu_buffer_map_state.0"></a> <a href="#gpu_buffer_map_state"><a href="#gpu_buffer_map_state"><code>gpu-buffer-map-state</code></a></a></li>
 </ul>
-<h4><a id="method_gpu_buffer_map_async"></a><code>[method]gpu-buffer.map-async: func</code></h4>
+<h4><a id="async_method_gpu_buffer_map_async"></a><code>[async method]gpu-buffer.map-async: func</code></h4>
 <h5>Params</h5>
 <ul>
-<li><a id="method_gpu_buffer_map_async.self"></a><code>self</code>: borrow&lt;<a href="#gpu_buffer"><a href="#gpu_buffer"><code>gpu-buffer</code></a></a>&gt;</li>
-<li><a id="method_gpu_buffer_map_async.mode"></a><code>mode</code>: <a href="#gpu_map_mode_flags"><a href="#gpu_map_mode_flags"><code>gpu-map-mode-flags</code></a></a></li>
-<li><a id="method_gpu_buffer_map_async.offset"></a><code>offset</code>: option&lt;<a href="#gpu_size64"><a href="#gpu_size64"><code>gpu-size64</code></a></a>&gt;</li>
-<li><a id="method_gpu_buffer_map_async.size"></a><code>size</code>: option&lt;<a href="#gpu_size64"><a href="#gpu_size64"><code>gpu-size64</code></a></a>&gt;</li>
+<li><a id="async_method_gpu_buffer_map_async.self"></a><code>self</code>: borrow&lt;<a href="#gpu_buffer"><a href="#gpu_buffer"><code>gpu-buffer</code></a></a>&gt;</li>
+<li><a id="async_method_gpu_buffer_map_async.mode"></a><code>mode</code>: <a href="#gpu_map_mode"><a href="#gpu_map_mode"><code>gpu-map-mode</code></a></a></li>
+<li><a id="async_method_gpu_buffer_map_async.offset"></a><code>offset</code>: option&lt;<a href="#gpu_size64"><a href="#gpu_size64"><code>gpu-size64</code></a></a>&gt;</li>
+<li><a id="async_method_gpu_buffer_map_async.size"></a><code>size</code>: option&lt;<a href="#gpu_size64"><a href="#gpu_size64"><code>gpu-size64</code></a></a>&gt;</li>
 </ul>
 <h5>Return values</h5>
 <ul>
-<li><a id="method_gpu_buffer_map_async.0"></a> result&lt;_, <a href="#map_async_error"><a href="#map_async_error"><code>map-async-error</code></a></a>&gt;</li>
+<li><a id="async_method_gpu_buffer_map_async.0"></a> result&lt;_, <a href="#map_async_error"><a href="#map_async_error"><code>map-async-error</code></a></a>&gt;</li>
 </ul>
 <h4><a id="method_gpu_buffer_get_mapped_range_get_with_copy"></a><code>[method]gpu-buffer.get-mapped-range-get-with-copy: func</code></h4>
 <h5>Params</h5>
@@ -1316,56 +1339,6 @@
 <ul>
 <li><a id="method_gpu_buffer_get_mapped_range_set_with_copy.0"></a> result&lt;_, <a href="#get_mapped_range_error"><a href="#get_mapped_range_error"><code>get-mapped-range-error</code></a></a>&gt;</li>
 </ul>
-<h4><a id="static_gpu_buffer_usage_map_read"></a><code>[static]gpu-buffer-usage.MAP-READ: func</code></h4>
-<h5>Return values</h5>
-<ul>
-<li><a id="static_gpu_buffer_usage_map_read.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
-</ul>
-<h4><a id="static_gpu_buffer_usage_map_write"></a><code>[static]gpu-buffer-usage.MAP-WRITE: func</code></h4>
-<h5>Return values</h5>
-<ul>
-<li><a id="static_gpu_buffer_usage_map_write.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
-</ul>
-<h4><a id="static_gpu_buffer_usage_copy_src"></a><code>[static]gpu-buffer-usage.COPY-SRC: func</code></h4>
-<h5>Return values</h5>
-<ul>
-<li><a id="static_gpu_buffer_usage_copy_src.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
-</ul>
-<h4><a id="static_gpu_buffer_usage_copy_dst"></a><code>[static]gpu-buffer-usage.COPY-DST: func</code></h4>
-<h5>Return values</h5>
-<ul>
-<li><a id="static_gpu_buffer_usage_copy_dst.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
-</ul>
-<h4><a id="static_gpu_buffer_usage_index"></a><code>[static]gpu-buffer-usage.INDEX: func</code></h4>
-<h5>Return values</h5>
-<ul>
-<li><a id="static_gpu_buffer_usage_index.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
-</ul>
-<h4><a id="static_gpu_buffer_usage_vertex"></a><code>[static]gpu-buffer-usage.VERTEX: func</code></h4>
-<h5>Return values</h5>
-<ul>
-<li><a id="static_gpu_buffer_usage_vertex.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
-</ul>
-<h4><a id="static_gpu_buffer_usage_uniform"></a><code>[static]gpu-buffer-usage.UNIFORM: func</code></h4>
-<h5>Return values</h5>
-<ul>
-<li><a id="static_gpu_buffer_usage_uniform.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
-</ul>
-<h4><a id="static_gpu_buffer_usage_storage"></a><code>[static]gpu-buffer-usage.STORAGE: func</code></h4>
-<h5>Return values</h5>
-<ul>
-<li><a id="static_gpu_buffer_usage_storage.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
-</ul>
-<h4><a id="static_gpu_buffer_usage_indirect"></a><code>[static]gpu-buffer-usage.INDIRECT: func</code></h4>
-<h5>Return values</h5>
-<ul>
-<li><a id="static_gpu_buffer_usage_indirect.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
-</ul>
-<h4><a id="static_gpu_buffer_usage_query_resolve"></a><code>[static]gpu-buffer-usage.QUERY-RESOLVE: func</code></h4>
-<h5>Return values</h5>
-<ul>
-<li><a id="static_gpu_buffer_usage_query_resolve.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
-</ul>
 <h4><a id="method_gpu_canvas_context_configure"></a><code>[method]gpu-canvas-context.configure: func</code></h4>
 <h5>Params</h5>
 <ul>
@@ -1394,31 +1367,6 @@
 <h5>Return values</h5>
 <ul>
 <li><a id="method_gpu_canvas_context_get_current_texture.0"></a> own&lt;<a href="#gpu_texture"><a href="#gpu_texture"><code>gpu-texture</code></a></a>&gt;</li>
-</ul>
-<h4><a id="static_gpu_color_write_red"></a><code>[static]gpu-color-write.RED: func</code></h4>
-<h5>Return values</h5>
-<ul>
-<li><a id="static_gpu_color_write_red.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
-</ul>
-<h4><a id="static_gpu_color_write_green"></a><code>[static]gpu-color-write.GREEN: func</code></h4>
-<h5>Return values</h5>
-<ul>
-<li><a id="static_gpu_color_write_green.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
-</ul>
-<h4><a id="static_gpu_color_write_blue"></a><code>[static]gpu-color-write.BLUE: func</code></h4>
-<h5>Return values</h5>
-<ul>
-<li><a id="static_gpu_color_write_blue.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
-</ul>
-<h4><a id="static_gpu_color_write_alpha"></a><code>[static]gpu-color-write.ALPHA: func</code></h4>
-<h5>Return values</h5>
-<ul>
-<li><a id="static_gpu_color_write_alpha.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
-</ul>
-<h4><a id="static_gpu_color_write_all"></a><code>[static]gpu-color-write.ALL: func</code></h4>
-<h5>Return values</h5>
-<ul>
-<li><a id="static_gpu_color_write_all.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
 </ul>
 <h4><a id="method_gpu_command_buffer_label"></a><code>[method]gpu-command-buffer.label: func</code></h4>
 <h5>Params</h5>
@@ -1849,25 +1797,25 @@
 <ul>
 <li><a id="method_gpu_device_create_render_pipeline.0"></a> own&lt;<a href="#gpu_render_pipeline"><a href="#gpu_render_pipeline"><code>gpu-render-pipeline</code></a></a>&gt;</li>
 </ul>
-<h4><a id="method_gpu_device_create_compute_pipeline_async"></a><code>[method]gpu-device.create-compute-pipeline-async: func</code></h4>
+<h4><a id="async_method_gpu_device_create_compute_pipeline_async"></a><code>[async method]gpu-device.create-compute-pipeline-async: func</code></h4>
 <h5>Params</h5>
 <ul>
-<li><a id="method_gpu_device_create_compute_pipeline_async.self"></a><code>self</code>: borrow&lt;<a href="#gpu_device"><a href="#gpu_device"><code>gpu-device</code></a></a>&gt;</li>
-<li><a id="method_gpu_device_create_compute_pipeline_async.descriptor"></a><code>descriptor</code>: <a href="#gpu_compute_pipeline_descriptor"><a href="#gpu_compute_pipeline_descriptor"><code>gpu-compute-pipeline-descriptor</code></a></a></li>
+<li><a id="async_method_gpu_device_create_compute_pipeline_async.self"></a><code>self</code>: borrow&lt;<a href="#gpu_device"><a href="#gpu_device"><code>gpu-device</code></a></a>&gt;</li>
+<li><a id="async_method_gpu_device_create_compute_pipeline_async.descriptor"></a><code>descriptor</code>: <a href="#gpu_compute_pipeline_descriptor"><a href="#gpu_compute_pipeline_descriptor"><code>gpu-compute-pipeline-descriptor</code></a></a></li>
 </ul>
 <h5>Return values</h5>
 <ul>
-<li><a id="method_gpu_device_create_compute_pipeline_async.0"></a> future&lt;result&lt;own&lt;<a href="#gpu_compute_pipeline"><a href="#gpu_compute_pipeline"><code>gpu-compute-pipeline</code></a></a>&gt;, <a href="#create_pipeline_error"><a href="#create_pipeline_error"><code>create-pipeline-error</code></a></a>&gt;&gt;</li>
+<li><a id="async_method_gpu_device_create_compute_pipeline_async.0"></a> result&lt;own&lt;<a href="#gpu_compute_pipeline"><a href="#gpu_compute_pipeline"><code>gpu-compute-pipeline</code></a></a>&gt;, <a href="#create_pipeline_error"><a href="#create_pipeline_error"><code>create-pipeline-error</code></a></a>&gt;</li>
 </ul>
-<h4><a id="method_gpu_device_create_render_pipeline_async"></a><code>[method]gpu-device.create-render-pipeline-async: func</code></h4>
+<h4><a id="async_method_gpu_device_create_render_pipeline_async"></a><code>[async method]gpu-device.create-render-pipeline-async: func</code></h4>
 <h5>Params</h5>
 <ul>
-<li><a id="method_gpu_device_create_render_pipeline_async.self"></a><code>self</code>: borrow&lt;<a href="#gpu_device"><a href="#gpu_device"><code>gpu-device</code></a></a>&gt;</li>
-<li><a id="method_gpu_device_create_render_pipeline_async.descriptor"></a><code>descriptor</code>: <a href="#gpu_render_pipeline_descriptor"><a href="#gpu_render_pipeline_descriptor"><code>gpu-render-pipeline-descriptor</code></a></a></li>
+<li><a id="async_method_gpu_device_create_render_pipeline_async.self"></a><code>self</code>: borrow&lt;<a href="#gpu_device"><a href="#gpu_device"><code>gpu-device</code></a></a>&gt;</li>
+<li><a id="async_method_gpu_device_create_render_pipeline_async.descriptor"></a><code>descriptor</code>: <a href="#gpu_render_pipeline_descriptor"><a href="#gpu_render_pipeline_descriptor"><code>gpu-render-pipeline-descriptor</code></a></a></li>
 </ul>
 <h5>Return values</h5>
 <ul>
-<li><a id="method_gpu_device_create_render_pipeline_async.0"></a> future&lt;result&lt;own&lt;<a href="#gpu_render_pipeline"><a href="#gpu_render_pipeline"><code>gpu-render-pipeline</code></a></a>&gt;, <a href="#create_pipeline_error"><a href="#create_pipeline_error"><code>create-pipeline-error</code></a></a>&gt;&gt;</li>
+<li><a id="async_method_gpu_device_create_render_pipeline_async.0"></a> result&lt;own&lt;<a href="#gpu_render_pipeline"><a href="#gpu_render_pipeline"><code>gpu-render-pipeline</code></a></a>&gt;, <a href="#create_pipeline_error"><a href="#create_pipeline_error"><code>create-pipeline-error</code></a></a>&gt;</li>
 </ul>
 <h4><a id="method_gpu_device_create_command_encoder"></a><code>[method]gpu-device.create-command-encoder: func</code></h4>
 <h5>Params</h5>
@@ -1929,14 +1877,14 @@
 <li><a id="method_gpu_device_push_error_scope.self"></a><code>self</code>: borrow&lt;<a href="#gpu_device"><a href="#gpu_device"><code>gpu-device</code></a></a>&gt;</li>
 <li><a id="method_gpu_device_push_error_scope.filter"></a><code>filter</code>: <a href="#gpu_error_filter"><a href="#gpu_error_filter"><code>gpu-error-filter</code></a></a></li>
 </ul>
-<h4><a id="method_gpu_device_pop_error_scope"></a><code>[method]gpu-device.pop-error-scope: func</code></h4>
+<h4><a id="async_method_gpu_device_pop_error_scope"></a><code>[async method]gpu-device.pop-error-scope: func</code></h4>
 <h5>Params</h5>
 <ul>
-<li><a id="method_gpu_device_pop_error_scope.self"></a><code>self</code>: borrow&lt;<a href="#gpu_device"><a href="#gpu_device"><code>gpu-device</code></a></a>&gt;</li>
+<li><a id="async_method_gpu_device_pop_error_scope.self"></a><code>self</code>: borrow&lt;<a href="#gpu_device"><a href="#gpu_device"><code>gpu-device</code></a></a>&gt;</li>
 </ul>
 <h5>Return values</h5>
 <ul>
-<li><a id="method_gpu_device_pop_error_scope.0"></a> future&lt;result&lt;option&lt;own&lt;<a href="#gpu_error"><a href="#gpu_error"><code>gpu-error</code></a></a>&gt;&gt;, <a href="#pop_error_scope_error"><a href="#pop_error_scope_error"><code>pop-error-scope-error</code></a></a>&gt;&gt;</li>
+<li><a id="async_method_gpu_device_pop_error_scope.0"></a> result&lt;option&lt;own&lt;<a href="#gpu_error"><a href="#gpu_error"><code>gpu-error</code></a></a>&gt;&gt;, <a href="#pop_error_scope_error"><a href="#pop_error_scope_error"><code>pop-error-scope-error</code></a></a>&gt;</li>
 </ul>
 <h4><a id="method_gpu_device_on_uncaptured_error"></a><code>[method]gpu-device.on-uncaptured-error: func</code></h4>
 <h5>Params</h5>
@@ -1982,16 +1930,6 @@
 <h5>Return values</h5>
 <ul>
 <li><a id="method_gpu_error_kind.0"></a> <a href="#gpu_error_kind"><a href="#gpu_error_kind"><code>gpu-error-kind</code></a></a></li>
-</ul>
-<h4><a id="static_gpu_map_mode_read"></a><code>[static]gpu-map-mode.READ: func</code></h4>
-<h5>Return values</h5>
-<ul>
-<li><a id="static_gpu_map_mode_read.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
-</ul>
-<h4><a id="static_gpu_map_mode_write"></a><code>[static]gpu-map-mode.WRITE: func</code></h4>
-<h5>Return values</h5>
-<ul>
-<li><a id="static_gpu_map_mode_write.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
 </ul>
 <h4><a id="method_gpu_pipeline_layout_label"></a><code>[method]gpu-pipeline-layout.label: func</code></h4>
 <h5>Params</h5>
@@ -2052,14 +1990,10 @@
 <li><a id="method_gpu_queue_submit.self"></a><code>self</code>: borrow&lt;<a href="#gpu_queue"><a href="#gpu_queue"><code>gpu-queue</code></a></a>&gt;</li>
 <li><a id="method_gpu_queue_submit.command_buffers"></a><code>command-buffers</code>: list&lt;borrow&lt;<a href="#gpu_command_buffer"><a href="#gpu_command_buffer"><code>gpu-command-buffer</code></a></a>&gt;&gt;</li>
 </ul>
-<h4><a id="method_gpu_queue_on_submitted_work_done"></a><code>[method]gpu-queue.on-submitted-work-done: func</code></h4>
+<h4><a id="async_method_gpu_queue_on_submitted_work_done"></a><code>[async method]gpu-queue.on-submitted-work-done: func</code></h4>
 <h5>Params</h5>
 <ul>
-<li><a id="method_gpu_queue_on_submitted_work_done.self"></a><code>self</code>: borrow&lt;<a href="#gpu_queue"><a href="#gpu_queue"><code>gpu-queue</code></a></a>&gt;</li>
-</ul>
-<h5>Return values</h5>
-<ul>
-<li><a id="method_gpu_queue_on_submitted_work_done.0"></a> future</li>
+<li><a id="async_method_gpu_queue_on_submitted_work_done.self"></a><code>self</code>: borrow&lt;<a href="#gpu_queue"><a href="#gpu_queue"><code>gpu-queue</code></a></a>&gt;</li>
 </ul>
 <h4><a id="method_gpu_queue_write_buffer_with_copy"></a><code>[method]gpu-queue.write-buffer-with-copy: func</code></h4>
 <h5>Params</h5>
@@ -2442,14 +2376,14 @@
 <li><a id="method_gpu_sampler_set_label.self"></a><code>self</code>: borrow&lt;<a href="#gpu_sampler"><a href="#gpu_sampler"><code>gpu-sampler</code></a></a>&gt;</li>
 <li><a id="method_gpu_sampler_set_label.label"></a><code>label</code>: <code>string</code></li>
 </ul>
-<h4><a id="method_gpu_shader_module_get_compilation_info"></a><code>[method]gpu-shader-module.get-compilation-info: func</code></h4>
+<h4><a id="async_method_gpu_shader_module_get_compilation_info"></a><code>[async method]gpu-shader-module.get-compilation-info: func</code></h4>
 <h5>Params</h5>
 <ul>
-<li><a id="method_gpu_shader_module_get_compilation_info.self"></a><code>self</code>: borrow&lt;<a href="#gpu_shader_module"><a href="#gpu_shader_module"><code>gpu-shader-module</code></a></a>&gt;</li>
+<li><a id="async_method_gpu_shader_module_get_compilation_info.self"></a><code>self</code>: borrow&lt;<a href="#gpu_shader_module"><a href="#gpu_shader_module"><code>gpu-shader-module</code></a></a>&gt;</li>
 </ul>
 <h5>Return values</h5>
 <ul>
-<li><a id="method_gpu_shader_module_get_compilation_info.0"></a> future&lt;own&lt;<a href="#gpu_compilation_info"><a href="#gpu_compilation_info"><code>gpu-compilation-info</code></a></a>&gt;&gt;</li>
+<li><a id="async_method_gpu_shader_module_get_compilation_info.0"></a> own&lt;<a href="#gpu_compilation_info"><a href="#gpu_compilation_info"><code>gpu-compilation-info</code></a></a>&gt;</li>
 </ul>
 <h4><a id="method_gpu_shader_module_label"></a><code>[method]gpu-shader-module.label: func</code></h4>
 <h5>Params</h5>
@@ -2465,21 +2399,6 @@
 <ul>
 <li><a id="method_gpu_shader_module_set_label.self"></a><code>self</code>: borrow&lt;<a href="#gpu_shader_module"><a href="#gpu_shader_module"><code>gpu-shader-module</code></a></a>&gt;</li>
 <li><a id="method_gpu_shader_module_set_label.label"></a><code>label</code>: <code>string</code></li>
-</ul>
-<h4><a id="static_gpu_shader_stage_vertex"></a><code>[static]gpu-shader-stage.VERTEX: func</code></h4>
-<h5>Return values</h5>
-<ul>
-<li><a id="static_gpu_shader_stage_vertex.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
-</ul>
-<h4><a id="static_gpu_shader_stage_fragment"></a><code>[static]gpu-shader-stage.FRAGMENT: func</code></h4>
-<h5>Return values</h5>
-<ul>
-<li><a id="static_gpu_shader_stage_fragment.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
-</ul>
-<h4><a id="static_gpu_shader_stage_compute"></a><code>[static]gpu-shader-stage.COMPUTE: func</code></h4>
-<h5>Return values</h5>
-<ul>
-<li><a id="static_gpu_shader_stage_compute.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
 </ul>
 <h4><a id="method_gpu_supported_features_has"></a><code>[method]gpu-supported-features.has: func</code></h4>
 <h5>Params</h5>
@@ -2900,7 +2819,7 @@
 </ul>
 <h5>Return values</h5>
 <ul>
-<li><a id="method_gpu_texture_usage.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
+<li><a id="method_gpu_texture_usage.0"></a> <a href="#gpu_texture_usage"><a href="#gpu_texture_usage"><code>gpu-texture-usage</code></a></a></li>
 </ul>
 <h4><a id="method_gpu_texture_texture_binding_view_dimension"></a><code>[method]gpu-texture.texture-binding-view-dimension: func</code></h4>
 <h5>Params</h5>
@@ -2925,36 +2844,6 @@
 <ul>
 <li><a id="method_gpu_texture_set_label.self"></a><code>self</code>: borrow&lt;<a href="#gpu_texture"><a href="#gpu_texture"><code>gpu-texture</code></a></a>&gt;</li>
 <li><a id="method_gpu_texture_set_label.label"></a><code>label</code>: <code>string</code></li>
-</ul>
-<h4><a id="static_gpu_texture_usage_copy_src"></a><code>[static]gpu-texture-usage.COPY-SRC: func</code></h4>
-<h5>Return values</h5>
-<ul>
-<li><a id="static_gpu_texture_usage_copy_src.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
-</ul>
-<h4><a id="static_gpu_texture_usage_copy_dst"></a><code>[static]gpu-texture-usage.COPY-DST: func</code></h4>
-<h5>Return values</h5>
-<ul>
-<li><a id="static_gpu_texture_usage_copy_dst.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
-</ul>
-<h4><a id="static_gpu_texture_usage_texture_binding"></a><code>[static]gpu-texture-usage.TEXTURE-BINDING: func</code></h4>
-<h5>Return values</h5>
-<ul>
-<li><a id="static_gpu_texture_usage_texture_binding.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
-</ul>
-<h4><a id="static_gpu_texture_usage_storage_binding"></a><code>[static]gpu-texture-usage.STORAGE-BINDING: func</code></h4>
-<h5>Return values</h5>
-<ul>
-<li><a id="static_gpu_texture_usage_storage_binding.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
-</ul>
-<h4><a id="static_gpu_texture_usage_render_attachment"></a><code>[static]gpu-texture-usage.RENDER-ATTACHMENT: func</code></h4>
-<h5>Return values</h5>
-<ul>
-<li><a id="static_gpu_texture_usage_render_attachment.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
-</ul>
-<h4><a id="static_gpu_texture_usage_transient_attachment"></a><code>[static]gpu-texture-usage.TRANSIENT-ATTACHMENT: func</code></h4>
-<h5>Return values</h5>
-<ul>
-<li><a id="static_gpu_texture_usage_transient_attachment.0"></a> <a href="#gpu_flags_constant"><a href="#gpu_flags_constant"><code>gpu-flags-constant</code></a></a></li>
 </ul>
 <h4><a id="method_gpu_texture_view_label"></a><code>[method]gpu-texture-view.label: func</code></h4>
 <h5>Params</h5>

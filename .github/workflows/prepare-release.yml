@@ -1,0 +1,55 @@
+name: Prepare Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  prepare:
+    name: Create Release PR
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Determine next RC version
+        id: version
+        run: |
+          # Find highest RC number from existing tags
+          HIGHEST_RC=0
+          for tag in $(git tag -l 'v0.2.0-rc.*'); do
+            if [[ "$tag" =~ ^v0\.2\.0-rc\.([0-9]+)$ ]]; then
+              RC_NUM="${BASH_REMATCH[1]}"
+              if [ "$RC_NUM" -gt "$HIGHEST_RC" ]; then
+                HIGHEST_RC="$RC_NUM"
+              fi
+            fi
+          done
+
+          NEXT_RC=$((HIGHEST_RC + 1))
+          VERSION="0.2.0-rc.${NEXT_RC}"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Preparing version: $VERSION"
+
+      - name: Bump package version
+        run: |
+          # Update package version (matches wasi:webgpu@ANY_VERSION)
+          find wit -type f -name "*.wit" -exec sed -i \
+            "s/\(wasi:webgpu@\)[^;]*/\1${{ steps.version.outputs.version }}/g" {} +
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0 # v8.1.0
+        with:
+          commit-message: "chore: bump version to ${{ steps.version.outputs.version }}"
+          branch: release/${{ steps.version.outputs.version }}
+          title: "Release ${{ steps.version.outputs.version }}"
+          body: |
+            Bumps package version to `${{ steps.version.outputs.version }}`.
+
+            Once merged, manually run the **Publish Release** workflow to:
+            - Create git tag `v${{ steps.version.outputs.version }}`
+            - Create GitHub release
+            - Publish to `ghcr.io/webassembly/wasi/webgpu:${{ steps.version.outputs.version }}`
